@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-heading: "Raleway", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Avenir Next";
+    src: local("Avenir Next"), local("AvenirNext");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Avenir Next";
+    src: local("Avenir Next Bold"), local("AvenirNext-Bold");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  :root {
+    --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      sans-serif;
+    --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-heading: "Raleway", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-avenir: "Avenir Next", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 18%;
+    --card: 330 100% 98%;
+    --card-foreground: 0 0% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 18%;
+    --primary: 350 100% 88%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 325 100% 98%;
+    --secondary-foreground: 0 0% 18%;
+    --accent: 325 100% 98%;
+    --accent-foreground: 0 0% 18%;
+    --muted: 325 100% 97%;
+    --muted-foreground: 0 0% 45%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 325 100% 95%;
+    --input: 325 100% 95%;
+    --ring: 350 100% 88%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    background-color: #fafafa;
+    color: #2e2e2e;
+  }
+
+  /* Apply Raleway to headings with thin weight */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: 100; /* Thin weight */
+    letter-spacing: -0.02em;
+  }
+
+  /* Apply specific styling to large headings */
+  h1 {
+    font-weight: 100; /* Thin weight */
+    letter-spacing: -0.03em;
+  }
+
+  /* Keep Playfair Display for specific elements that need it */
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply text-[#2E2E2E] hover:text-[#FF90BB] transition-colors;
+  }
+
+  .nav-link.active {
+    @apply text-[#FF90BB] font-medium;
+  }
+
+  .btn-primary {
+    @apply bg-[#FF90BB] hover:bg-[#ff7aa9] text-white px-6 py-3 rounded-xl text-sm tracking-wide transition;
+  }
+
+  .btn-secondary {
+    @apply bg-[#E6F0FF] hover:bg-[#F0F7FF] text-[#b8b7b6] px-6 py-3 rounded-xl text-sm tracking-wide transition;
+  }
+
+  .btn-dark {
+    @apply bg-[#f96c8b] hover:bg-[#f85a7e] text-white px-6 py-3 rounded-xl text-sm tracking-wide transition;
+  }
+
+  /* Add heading styles */
+  .heading-xl {
+    @apply text-4xl md:text-5xl font-heading font-thin leading-tight;
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-heading font-thin leading-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl md:text-3xl font-heading font-thin leading-tight;
+  }
+
+  .heading-sm {
+    @apply text-xl md:text-2xl font-heading font-thin leading-tight;
+  }
+}
+
+/* Fix for large text sizes */
+@media (min-width: 1024px) {
+  .heading-xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+/* Ken Burns Effect */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0px, 0px);
+  }
+  50% {
+    transform: scale(1.1) translate(-10px, -10px);
+  }
+  100% {
+    transform: scale(1) translate(0px, 0px);
+  }
+}
