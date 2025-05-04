@@ -116,9 +116,13 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto space-y-16">
               {clinicalItems.map((service: any, index: number) => (
-                <div key={index} className="flex flex-col md:flex-row items-center gap-10">
-                  {index === 0 && (
-                    <div className="md:w-2/5">
+                <div
+                  key={index}
+                  className="flex flex-col md:flex-row items-center gap-10"
+                  style={{ flexDirection: index % 2 === 0 ? "row" : "row-reverse" }}
+                >
+                  <div className="md:w-2/5">
+                    {index === 0 ? (
                       <div className="relative aspect-square w-full">
                         <Image
                           src="/dry-skin-closeup.jpeg"
@@ -127,9 +131,13 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
                           className="object-cover rounded-xl shadow-md"
                         />
                       </div>
-                    </div>
-                  )}
-                  <div className={index === 0 ? "md:w-3/5" : "w-full"}>
+                    ) : (
+                      <div className="w-full aspect-square">
+                        <TrichologySlideshow images={trichologyImages} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="md:w-3/5">
                     <h2 className="heading-md mb-4" style={{ color: "#2E2E2E" }}>
                       {service.title}
                     </h2>
@@ -150,11 +158,6 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
                         </li>
                       ))}
                     </ul>
-                    {service.title === "Trichology and Onychology" || service.title === "Tricologia e Onicologia" ? (
-                      <div className="my-8">
-                        <TrichologySlideshow images={trichologyImages} />
-                      </div>
-                    ) : null}
                   </div>
                 </div>
               ))}
