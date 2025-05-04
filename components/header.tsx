@@ -78,6 +78,11 @@ export function Header({ lang, dictionary = {} }: HeaderProps) {
     // Map current path to equivalent in target language
     const currentPath = pathname.replace(`/${lang}`, "")
 
+    // Handle root path
+    if (currentPath === "" || currentPath === "/") {
+      return `/${targetLang}`
+    }
+
     // Handle special path translations
     if (targetLang === "pt" && lang === "en") {
       if (currentPath === "/about") return "/pt/dr-henrique-oliveira"
@@ -104,6 +109,14 @@ export function Header({ lang, dictionary = {} }: HeaderProps) {
       if (isNavigating) return
 
       setIsNavigating(true)
+
+      // Use direct location change for language switching to ensure full page reload
+      if (url.startsWith("/pt") || url.startsWith("/en")) {
+        window.location.href = url
+        return
+      }
+
+      // Use router for other navigation
       router.push(url)
 
       // Reset after navigation
