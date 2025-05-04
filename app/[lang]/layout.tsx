@@ -139,13 +139,13 @@ export default async function LangLayout({
           }),
         }}
       />
-      <Suspense fallback={<div className="h-24 bg-gradient-to-b from-pink-300 to-pink-200"></div>}>
+      <Suspense fallback={<div className="h-16 bg-gradient-to-b from-pink-300 to-pink-200"></div>}>
         <NavigationIndicator />
       </Suspense>
-      <Suspense fallback={<div className="h-24 bg-gradient-to-b from-pink-300 to-pink-200"></div>}>
+      <Suspense fallback={<div className="h-16 bg-gradient-to-b from-pink-300 to-pink-200"></div>}>
         <AnimatedHeader lang={validLang} dictionary={dictionary} />
       </Suspense>
-      <main>{children}</main>
+      <main className="mt-0">{children}</main>
       <Footer lang={validLang} dictionary={dictionary} />
     </>
   )

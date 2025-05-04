@@ -99,50 +99,28 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
         }}
       />
       <div className="bg-[#FAFAFA]">
-        {/* Hero Section */}
-        <section className="bg-[#FFFFFF] py-16">
+        {/* Hero Section - Minimal height */}
+        <section className="bg-[#FFFFFF] py-4">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="heading-xl mb-6">Dermatologia Clínica</h1>
-              <p className="text-lg text-gray-700">
-                Diagnóstico e tratamento especializado para diversas condições dermatológicas.
-              </p>
+              <h1 className="heading-xl mb-2">Dermatologia Clínica</h1>
             </div>
           </div>
         </section>
 
-        {/* Services List */}
-        <section className="py-16">
+        {/* Services List - Further reduced spacing */}
+        <section className="py-6">
           <div className="container mx-auto px-6">
-            <div className="max-w-5xl mx-auto space-y-16">
+            <div className="max-w-5xl mx-auto space-y-8">
               {clinicalItems.map((service: any, index: number) => (
-                <div
-                  key={index}
-                  className="flex flex-col md:flex-row items-center gap-10"
-                  style={{ flexDirection: index % 2 === 0 ? "row" : "row-reverse" }}
-                >
-                  <div className="md:w-2/5">
-                    {index === 0 ? (
-                      <div className="relative aspect-square w-full">
-                        <Image
-                          src="/dry-skin-closeup.jpeg"
-                          alt={altTexts.drySkin}
-                          fill
-                          className="object-cover rounded-xl shadow-md"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full aspect-square">
-                        <TrichologySlideshow images={trichologyImages} />
-                      </div>
-                    )}
-                  </div>
-                  <div className="md:w-3/5">
-                    <h2 className="heading-md mb-4" style={{ color: "#2E2E2E" }}>
+                <div key={index} className="flex flex-col md:flex-row items-center gap-6">
+                  {/* Text Content - Always First on Mobile */}
+                  <div className={`w-full md:w-3/5 ${index % 2 !== 0 ? "md:order-2" : "md:order-1"}`}>
+                    <h2 className="heading-md mb-2" style={{ color: "#2E2E2E" }}>
                       {service.title}
                     </h2>
-                    <p className="text-gray-700 mb-4">{service.description}</p>
-                    <ul className="space-y-2">
+                    <p className="text-gray-700 mb-2">{service.description}</p>
+                    <ul className="space-y-1">
                       {service.benefits.map((benefit: string, i: number) => (
                         <li key={i} className="flex items-start">
                           <span
@@ -159,33 +137,47 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
                       ))}
                     </ul>
                   </div>
+
+                  {/* Image Content - Always Second on Mobile */}
+                  <div className={`w-full md:w-2/5 mt-3 md:mt-0 ${index % 2 !== 0 ? "md:order-1" : "md:order-2"}`}>
+                    {index === 0 ? (
+                      <div className="relative aspect-square w-full">
+                        <Image
+                          src="/dry-skin-closeup.jpeg"
+                          alt={altTexts.drySkin}
+                          fill
+                          className="object-cover rounded-xl shadow-md"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full aspect-square">
+                        <TrichologySlideshow images={trichologyImages} />
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Conditions Treated Section */}
-        <section className="py-16 bg-[#e8e8e8]">
+        {/* Conditions Treated Section - Further reduced spacing */}
+        <section className="py-6 bg-[#e8e8e8]">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="heading-lg mb-4" style={{ color: "#2E2E2E" }}>
+              <div className="text-center mb-4">
+                <h2 className="heading-lg mb-2" style={{ color: "#2E2E2E" }}>
                   {dict.services.conditions.title}
                 </h2>
-                <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-                  Tratamento de uma ampla variedade de condições dermatológicas com abordagens personalizadas e
-                  eficazes.
-                </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-3 gap-4">
                 {relevantConditions.map((category: any, index: number) => (
-                  <div key={index} className="bg-white rounded-xl shadow-sm p-6">
-                    <h3 className="text-xl font-medium mb-4" style={{ color: "#2E2E2E" }}>
+                  <div key={index} className="bg-white rounded-xl shadow-sm p-4">
+                    <h3 className="text-lg font-medium mb-2" style={{ color: "#2E2E2E" }}>
                       {category.title}
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1">
                       {category.conditions.map((condition: string, i: number) => (
                         <li key={i} className="flex items-start">
                           <span
@@ -208,27 +200,24 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="py-16" style={{ backgroundColor: "#e8e8e8" }}>
+        {/* Call to Action - Further reduced spacing */}
+        <section className="py-6" style={{ backgroundColor: "#e8e8e8" }}>
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="heading-md mb-6" style={{ color: "#2E2E2E" }}>
+              <h2 className="heading-md mb-3" style={{ color: "#2E2E2E" }}>
                 Agende sua consulta para uma avaliação dermatológica completa
               </h2>
-              <p className="text-lg text-[#2E2E2E] mb-8">
-                Entre em contato para agendar uma consulta com Dr. Henrique Oliveira.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href={`/${params.lang}/contato`}
-                  className="inline-block px-8 py-3 rounded-xl text-sm tracking-wide transition"
+                  className="inline-block px-6 py-2 rounded-xl text-sm tracking-wide transition"
                   style={{ backgroundColor: "#f96c8b", color: "white" }}
                 >
                   Agendar Consulta
                 </Link>
                 <Link
                   href={`/${params.lang}/faq`}
-                  className="inline-block px-8 py-3 rounded-xl text-sm tracking-wide transition"
+                  className="inline-block px-6 py-2 rounded-xl text-sm tracking-wide transition"
                   style={{ backgroundColor: "#e8e8e8", color: "#31029c" }}
                 >
                   Ver Perguntas Frequentes

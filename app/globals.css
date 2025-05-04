@@ -64,6 +64,7 @@
   body {
     background-color: #fafafa;
     color: #2e2e2e;
+    line-height: 1.4;
   }
 
   /* Apply Raleway to headings with thin weight */
@@ -76,6 +77,7 @@
     font-family: var(--font-heading);
     font-weight: 100; /* Thin weight */
     letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   /* Apply specific styling to large headings */
@@ -87,6 +89,28 @@
   /* Keep Playfair Display for specific elements that need it */
   .font-serif {
     font-family: var(--font-serif);
+  }
+
+  /* Reduce default section spacing */
+  section {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    section {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  /* Reduce paragraph margins */
+  p {
+    margin-bottom: 0.75rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -100,39 +124,39 @@
   }
 
   .btn-primary {
-    @apply bg-[#FF90BB] hover:bg-[#ff7aa9] text-white px-6 py-3 rounded-xl text-sm tracking-wide transition;
+    @apply bg-[#FF90BB] hover:bg-[#ff7aa9] text-white px-5 py-2 rounded-xl text-sm tracking-wide transition;
   }
 
   .btn-secondary {
-    @apply bg-[#E6F0FF] hover:bg-[#F0F7FF] text-[#b8b7b6] px-6 py-3 rounded-xl text-sm tracking-wide transition;
+    @apply bg-[#E6F0FF] hover:bg-[#F0F7FF] text-[#b8b7b6] px-5 py-2 rounded-xl text-sm tracking-wide transition;
   }
 
   .btn-dark {
-    @apply bg-[#f96c8b] hover:bg-[#f85a7e] text-white px-6 py-3 rounded-xl text-sm tracking-wide transition;
+    @apply bg-[#f96c8b] hover:bg-[#f85a7e] text-white px-5 py-2 rounded-xl text-sm tracking-wide transition;
   }
 
-  /* Add heading styles */
+  /* Add heading styles with reduced line heights */
   .heading-xl {
-    @apply text-4xl md:text-5xl font-heading font-thin leading-tight;
-  }
-
-  .heading-lg {
     @apply text-3xl md:text-4xl font-heading font-thin leading-tight;
   }
 
-  .heading-md {
+  .heading-lg {
     @apply text-2xl md:text-3xl font-heading font-thin leading-tight;
   }
 
-  .heading-sm {
+  .heading-md {
     @apply text-xl md:text-2xl font-heading font-thin leading-tight;
+  }
+
+  .heading-sm {
+    @apply text-lg md:text-xl font-heading font-thin leading-tight;
   }
 }
 
 /* Fix for large text sizes */
 @media (min-width: 1024px) {
   .heading-xl {
-    font-size: 3.75rem;
+    font-size: 2.75rem;
     line-height: 1;
   }
 }
