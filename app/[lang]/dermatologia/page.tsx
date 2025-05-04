@@ -37,15 +37,11 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
   const dict = await getDictionary(params.lang)
 
   // Extract clinical dermatology and related items from the services dictionary
+  // Filter to only include the first and third items (Clinical and Trichology)
   const clinicalItems = dict.services.items.filter((item: any) =>
-    [
-      "Clinical Dermatology",
-      "Dermatologia Clínica",
-      "Surgical Dermatology",
-      "Dermatologia Cirúrgica",
-      "Trichology and Onychology",
-      "Tricologia e Onicologia",
-    ].includes(item.title),
+    ["Clinical Dermatology", "Dermatologia Clínica", "Trichology and Onychology", "Tricologia e Onicologia"].includes(
+      item.title,
+    ),
   )
 
   // Extract relevant conditions
@@ -64,16 +60,16 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
   const altTexts = {
     drySkin:
       "Close-up de pele seca com textura escamosa, mostrando detalhes da superfície cutânea tratada em dermatologia clínica",
-    inflammatorySkin:
-      "Braço de criança com condição inflamatória da pele mostrando erupção cutânea avermelhada, demonstrando sintomas que requerem tratamento dermatológico",
-    hairCloseup:
-      "Close-up microscópico de fios de cabelo mostrando a textura e estrutura capilar, importante para diagnósticos em tricologia",
   }
 
   const trichologyImages = [
     {
       src: "/hair-closeup.jpeg",
       alt: "Hair closeup showing follicles and scalp",
+    },
+    {
+      src: "/nail-fungus.jpeg",
+      alt: "Nail fungus condition showing affected fingernails",
     },
   ]
 
@@ -120,34 +116,20 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto space-y-16">
               {clinicalItems.map((service: any, index: number) => (
-                <div
-                  key={index}
-                  className="flex flex-col md:flex-row items-center gap-10"
-                  style={{ flexDirection: index % 2 === 0 ? "row" : "row-reverse" }}
-                >
-                  <div className="md:w-2/5">
-                    <div className="relative aspect-square w-full">
-                      <Image
-                        src={
-                          index === 0
-                            ? "/dry-skin-closeup.jpeg"
-                            : index === 1
-                              ? "/inflammatory-skin-condition.jpeg"
-                              : "/hair-closeup.jpeg"
-                        }
-                        alt={
-                          index === 0
-                            ? altTexts.drySkin
-                            : index === 1
-                              ? altTexts.inflammatorySkin
-                              : altTexts.hairCloseup
-                        }
-                        fill
-                        className="object-cover rounded-xl shadow-md"
-                      />
+                <div key={index} className="flex flex-col md:flex-row items-center gap-10">
+                  {index === 0 && (
+                    <div className="md:w-2/5">
+                      <div className="relative aspect-square w-full">
+                        <Image
+                          src="/dry-skin-closeup.jpeg"
+                          alt={altTexts.drySkin}
+                          fill
+                          className="object-cover rounded-xl shadow-md"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="md:w-3/5">
+                  )}
+                  <div className={index === 0 ? "md:w-3/5" : "w-full"}>
                     <h2 className="heading-md mb-4" style={{ color: "#2E2E2E" }}>
                       {service.title}
                     </h2>
