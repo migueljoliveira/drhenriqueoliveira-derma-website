@@ -75,10 +75,6 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
       src: "/hair-closeup.jpeg",
       alt: "Hair closeup showing follicles and scalp",
     },
-    {
-      src: "/nail-fungus.jpeg",
-      alt: "Nail fungus condition showing affected fingernails",
-    },
   ]
 
   return (
@@ -174,7 +170,6 @@ export default async function DermatologyPage({ params }: { params: { lang: stri
                     </ul>
                     {service.title === "Trichology and Onychology" || service.title === "Tricologia e Onicologia" ? (
                       <div className="my-8">
-                        <h3 className="text-2xl font-semibold mb-4">Tricologia e Onicologia</h3>
                         <TrichologySlideshow images={trichologyImages} />
                       </div>
                     ) : null}
