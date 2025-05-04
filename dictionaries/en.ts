@@ -166,32 +166,38 @@ export const en = {
   about: {
     title: "About",
     subtitle: "Learn more about Dr. Henrique Oliveira and his commitment to exceptional dermatological care.",
-    doctor: {
-      name: "Dr. Henrique Oliveira",
-      title: "Dermatologist & Specialist in Aesthetic and Cosmetic Dermatology",
-      imageAlt: "Dr. Henrique Oliveira",
-      bio: [
-        "Dr. Henrique Oliveira is a board-certified dermatologist with over 30 years of experience in both medical and cosmetic dermatology. After graduating from the University of Coimbra Medical School, he completed his residency and pursued specialized training in dermatology and venereology.",
-        "His expertise spans a wide range of dermatological conditions and aesthetic treatments, with a particular focus on non-invasive rejuvenation techniques and photodynamic therapy. Dr. Oliveira is known for his meticulous attention to detail and his ability to create natural-looking results tailored to each patient's unique needs.",
-      ],
-      education: {
-        title: "Education",
-        detail:
-          "University of Coimbra Medical School, Specialized training in Dermatology and Venereology. Subspecialty in Aesthetic Medicine",
-      },
-      experience: {
-        title: "Experience",
-        detail: "Over 30 years of specialized dermatological practice",
-      },
-    },
-    philosophy: {
-      title: "Our Philosophy",
-      paragraphs: [
-        "Healthy skin is the foundation of beauty and confidence. Dr. Henrique Oliveira's approach combines medical expertise with aesthetic sensibility to address both dermatological concerns and aesthetic goals.",
-        "He is committed to providing personalized care in a comfortable, welcoming environment. Each treatment plan is carefully tailored to the individual patient, taking into account their unique skin type, concerns, and desired outcomes.",
-        "He prioritizes natural-looking results and long-term skin health over quick fixes. Through a combination of advanced treatments, education, and preventative care, he helps his patients achieve and maintain their best possible skin throughout their lives.",
+    description1:
+      "Dr. Henrique Oliveira is a board-certified dermatologist with over 30 years of experience in both medical and cosmetic dermatology. After graduating from the University of Coimbra Medical School, he completed his residency and pursued specialized training in dermatology and venereology.",
+    description2:
+      "His expertise spans a wide range of dermatological conditions and aesthetic treatments, with a particular focus on non-invasive rejuvenation techniques and photodynamic therapy. Dr. Oliveira is known for his meticulous attention to detail and his ability to create natural-looking results tailored to each patient's unique needs.",
+    description3:
+      "He is committed to providing personalized care in a comfortable, welcoming environment. Each treatment plan is carefully tailored to the individual patient, taking into account their unique skin type, concerns, and desired outcomes.",
+    education: {
+      title: "Education",
+      items: [
+        "University of Coimbra Medical School",
+        "Specialized training in Dermatology and Venereology",
+        "Subspecialty in Aesthetic Medicine",
       ],
     },
+    experience: {
+      title: "Experience",
+      items: [
+        "Over 30 years of specialized dermatological practice",
+        "Expert in clinical and aesthetic dermatology",
+        "Specialized in non-invasive rejuvenation techniques",
+      ],
+    },
+    affiliations: {
+      title: "Professional Affiliations",
+      items: [
+        "Portuguese Society of Dermatology",
+        "European Academy of Dermatology and Venereology",
+        "International Society of Dermatology",
+      ],
+    },
+    contactButton: "Schedule a Consultation",
+    website: "Visit our website:",
   },
   services: {
     title: "Our Services",
