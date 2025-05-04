@@ -1,6 +1,4 @@
 "use client"
-
-import Image from "next/image"
 import Link from "next/link"
 import Script from "next/script"
 import { useState } from "react"
@@ -237,24 +235,20 @@ export default function TechnologiesClientPage({ params }: { params: { lang: str
                           className="relative h-80 w-full rounded-xl overflow-hidden shadow-md cursor-pointer"
                           onClick={() => openLightbox(tech.image)}
                         >
-                          <Image
+                          <img
                             src={tech.image || "/placeholder.svg"}
                             alt={tech.title}
-                            fill
-                            className="object-cover"
-                            unoptimized={true}
+                            className="object-cover w-full h-full"
                           />
                         </div>
                         <div
                           className="relative h-40 w-full rounded-xl overflow-hidden shadow-md cursor-pointer"
                           onClick={() => openLightbox(tech.additionalImage)}
                         >
-                          <Image
+                          <img
                             src={tech.additionalImage || "/placeholder.svg"}
                             alt={`${tech.title} - ${params.lang === "pt" ? "Detalhe" : "Detail"}`}
-                            fill
-                            className="object-cover"
-                            unoptimized={true}
+                            className="object-cover w-full h-full"
                           />
                         </div>
                       </div>
@@ -263,12 +257,10 @@ export default function TechnologiesClientPage({ params }: { params: { lang: str
                         className="relative h-80 w-full rounded-xl overflow-hidden shadow-md cursor-pointer"
                         onClick={() => openLightbox(tech.image)}
                       >
-                        <Image
+                        <img
                           src={tech.image || "/placeholder.svg"}
                           alt={tech.title}
-                          fill
-                          className="object-cover"
-                          unoptimized={true}
+                          className="object-cover w-full h-full"
                         />
                       </div>
                     )}

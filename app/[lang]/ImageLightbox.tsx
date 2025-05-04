@@ -15,6 +15,7 @@ interface ImageLightboxProps {
 
 export default function ImageLightbox({ images, lang }: ImageLightboxProps) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({})
 
   // Close lightbox when Escape key is pressed
   useEffect(() => {
@@ -32,6 +33,28 @@ export default function ImageLightbox({ images, lang }: ImageLightboxProps) {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [selectedImage, images.length])
 
+  // Prevent body scroll when lightbox is open
+  useEffect(() => {
+    if (selectedImage !== null) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [selectedImage])
+
+  const handleImageError = (index: number) => {
+    console.error(`Error loading image at index ${index}:`, images[index].src)
+    setImageErrors((prev) => ({ ...prev, [index]: true }))
+  }
+
+  // Function to determine if an image is a direct URL (starts with http)
+  const isDirectUrl = (src: string) => {
+    return src.startsWith("http")
+  }
+
   return (
     <>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -41,12 +64,28 @@ export default function ImageLightbox({ images, lang }: ImageLightboxProps) {
             className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
             onClick={() => setSelectedImage(index)}
           >
-            <Image
-              src={image.src || "/placeholder.svg"}
-              alt={image.alt}
-              fill
-              className="object-cover group-hover:scale-105 transition duration-500"
-            />
+            {imageErrors[index] || isDirectUrl(image.src) ? (
+              // Use regular img tag for direct URLs or if Next.js Image fails
+              <img
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                onError={() => {
+                  if (!imageErrors[index]) {
+                    handleImageError(index)
+                  }
+                }}
+              />
+            ) : (
+              <Image
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                fill
+                className="object-cover group-hover:scale-105 transition duration-500"
+                unoptimized={true}
+                onError={() => handleImageError(index)}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
               <p className="text-white font-medium p-4">{image.alt.split(" ")[0]}</p>
             </div>
@@ -127,18 +166,32 @@ export default function ImageLightbox({ images, lang }: ImageLightboxProps) {
               </div>
 
               {/* Image */}
-              <Image
-                src={images[selectedImage].src || "/placeholder.svg"}
-                alt={images[selectedImage].alt}
-                width={1200}
-                height={800}
-                className="object-contain max-h-[80vh] rounded-lg shadow-2xl cursor-pointer"
-                priority
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setSelectedImage(null)
-                }}
-              />
+              {imageErrors[selectedImage] || isDirectUrl(images[selectedImage].src) ? (
+                <img
+                  src={images[selectedImage].src || "/placeholder.svg"}
+                  alt={images[selectedImage].alt}
+                  className="object-contain max-h-[80vh] w-full rounded-lg shadow-2xl cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSelectedImage(null)
+                  }}
+                />
+              ) : (
+                <Image
+                  src={images[selectedImage].src || "/placeholder.svg"}
+                  alt={images[selectedImage].alt}
+                  width={1200}
+                  height={800}
+                  className="object-contain max-h-[80vh] rounded-lg shadow-2xl cursor-pointer"
+                  priority
+                  unoptimized={true}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSelectedImage(null)
+                  }}
+                  onError={() => handleImageError(selectedImage)}
+                />
+              )}
 
               {/* Caption */}
               <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 text-center">

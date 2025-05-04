@@ -1,76 +1,98 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 
+interface SlideshowImage {
+  src: string
+  alt: string
+}
+
 interface TrichologySlideshowProps {
-  images: {
-    src: string
-    alt: string
-  }[]
+  images: SlideshowImage[]
   interval?: number
 }
 
 export function TrichologySlideshow({ images, interval = 5000 }: TrichologySlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(1) // 1 for zoom in, -1 for zoom out
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({})
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
+  // Function to go to the next slide
+  const goToNextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }
+
+  // Set up the interval for automatic slideshow
   useEffect(() => {
-    // Alternate between zoom in and zoom out for Ken Burns effect
-    setDirection((prev) => prev * -1)
-  }, [currentIndex])
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-    }, interval)
+    // Set a new timeout
+    timeoutRef.current = setTimeout(goToNextSlide, interval)
 
-    return () => clearInterval(timer)
-  }, [images.length, interval])
+    // Cleanup function
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [currentIndex, interval])
+
+  const handleImageError = (index: number) => {
+    console.error(`Error loading image at index ${index}:`, images[index].src)
+    setImageErrors((prev) => ({ ...prev, [index]: true }))
+  }
+
+  // Function to determine if an image is a direct URL (starts with http)
+  const isDirectUrl = (src: string) => {
+    return src.startsWith("http")
+  }
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden rounded-xl shadow-lg">
+    <div className="relative w-full h-64 md:h-80 overflow-hidden rounded-lg">
       <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0"
-        >
+        {images.map((image, index) => (
           <motion.div
-            initial={{ scale: direction > 0 ? 1 : 1.1, x: direction > 0 ? 0 : "5%", y: direction > 0 ? 0 : "5%" }}
-            animate={{ scale: direction > 0 ? 1.1 : 1, x: direction > 0 ? "5%" : 0, y: direction > 0 ? "5%" : 0 }}
-            transition={{ duration: interval / 1000, ease: "easeInOut" }}
-            className="relative w-full h-full"
-          >
-            <Image
-              src={images[currentIndex].src || "/placeholder.svg"}
-              alt={images[currentIndex].alt}
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-
-      {/* Dots indicator */}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-        {images.map((_, index) => (
-          <button
             key={index}
-            className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-white/40"}`}
-            onClick={() => setCurrentIndex(index)}
-            aria-label={`Go to slide ${index + 1}`}
-          />
+            className={`absolute inset-0 ${index === currentIndex ? "z-10" : "z-0"}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: index === currentIndex ? 1 : 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5 }}
+          >
+            <div className="relative w-full h-full">
+              {imageErrors[index] || isDirectUrl(image.src) ? (
+                // Use regular img tag for direct URLs or if Next.js Image fails
+                <img
+                  src={image.src || "/placeholder.svg"}
+                  alt={image.alt}
+                  className={`w-full h-full object-cover ken-burns-effect-${index % 2}`}
+                  onError={() => {
+                    if (!imageErrors[index]) {
+                      handleImageError(index)
+                    }
+                  }}
+                />
+              ) : (
+                <Image
+                  src={image.src || "/placeholder.svg"}
+                  alt={image.alt}
+                  fill
+                  className={`object-cover ken-burns-effect-${index % 2}`}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={index === currentIndex}
+                  unoptimized={true}
+                  onError={() => handleImageError(index)}
+                />
+              )}
+            </div>
+          </motion.div>
         ))}
-      </div>
+      </AnimatePresence>
     </div>
   )
 }

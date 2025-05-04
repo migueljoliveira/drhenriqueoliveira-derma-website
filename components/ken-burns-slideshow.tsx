@@ -83,7 +83,7 @@ export function KenBurnsSlideshow({
   // Initialize Ken Burns parameters on first render
   useEffect(() => {
     generateRandomKenBurnsParams()
-  }, [])
+  }, [generateRandomKenBurnsParams])
 
   // Handle click to go to next slide
   const handleClick = () => {

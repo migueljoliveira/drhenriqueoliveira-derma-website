@@ -20,6 +20,7 @@ export function AnimatedGallery({ images, aspectRatio = "square", columns = 3 }:
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [direction, setDirection] = useState(0)
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({})
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -66,6 +67,16 @@ export function AnimatedGallery({ images, aspectRatio = "square", columns = 3 }:
     setDirection(step)
     const newIndex = (selectedIndex + step + images.length) % images.length
     setSelectedIndex(newIndex)
+  }
+
+  const handleImageError = (index: number) => {
+    console.error(`Error loading image at index ${index}:`, images[index].src)
+    setImageErrors((prev) => ({ ...prev, [index]: true }))
+  }
+
+  // Function to determine if an image is a direct URL (starts with http)
+  const isDirectUrl = (src: string) => {
+    return src.startsWith("http")
   }
 
   // Determine aspect ratio class
@@ -115,13 +126,29 @@ export function AnimatedGallery({ images, aspectRatio = "square", columns = 3 }:
             }}
             onClick={() => openLightbox(index)}
           >
-            <Image
-              src={image.src || "/placeholder.svg"}
-              alt={image.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500"
-            />
+            {imageErrors[index] || isDirectUrl(image.src) ? (
+              // Use regular img tag for direct URLs or if Next.js Image fails
+              <img
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                className="w-full h-full object-cover"
+                onError={() => {
+                  if (!imageErrors[index]) {
+                    handleImageError(index)
+                  }
+                }}
+              />
+            ) : (
+              <Image
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500"
+                onError={() => handleImageError(index)}
+                unoptimized={true}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
               <div className="p-3 text-white text-sm">
                 <span className="sr-only">View larger image: </span>
@@ -210,18 +237,32 @@ export function AnimatedGallery({ images, aspectRatio = "square", columns = 3 }:
                   className="relative w-full h-full flex items-center justify-center"
                 >
                   <div className="relative max-w-4xl max-h-[80vh] w-auto h-auto">
-                    <Image
-                      src={images[selectedIndex].src || "/placeholder.svg"}
-                      alt={images[selectedIndex].alt}
-                      width={1200}
-                      height={800}
-                      className="object-contain max-h-[80vh] rounded-lg shadow-2xl cursor-pointer"
-                      priority
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        closeLightbox()
-                      }}
-                    />
+                    {imageErrors[selectedIndex] || isDirectUrl(images[selectedIndex].src) ? (
+                      <img
+                        src={images[selectedIndex].src || "/placeholder.svg"}
+                        alt={images[selectedIndex].alt}
+                        className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          closeLightbox()
+                        }}
+                      />
+                    ) : (
+                      <Image
+                        src={images[selectedIndex].src || "/placeholder.svg"}
+                        alt={images[selectedIndex].alt}
+                        width={1200}
+                        height={800}
+                        className="object-contain max-h-[80vh] rounded-lg shadow-2xl cursor-pointer"
+                        priority
+                        unoptimized={true}
+                        onError={() => handleImageError(selectedIndex)}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          closeLightbox()
+                        }}
+                      />
+                    )}
                   </div>
                 </motion.div>
               </AnimatePresence>
