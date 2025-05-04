@@ -215,7 +215,7 @@ export default function ContactPage() {
       </Head>
       <div className="bg-[#FAFAFA]">
         {/* Hero Section */}
-        <section className="bg-[#FFFFFF] py-16">
+        <section className="bg-[#FFFFFF] py-8">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="heading-xl mb-6" style={{ color: "#f96c8b" }}>
@@ -227,7 +227,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Form and Info */}
-        <section className="py-16">
+        <section className="py-10">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-12">
               {/* Contact Information */}
@@ -398,7 +398,7 @@ export default function ContactPage() {
         </section>
 
         {/* Map */}
-        <section className="py-8 pb-16">
+        <section className="py-6 pb-10">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="aspect-[16/9] w-full rounded-xl overflow-hidden shadow-md">

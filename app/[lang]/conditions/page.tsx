@@ -61,16 +61,16 @@ export default async function ConditionsPage({ params }: { params: { lang: strin
   ]
 
   return (
-    <div className="bg-white py-12">
+    <div className="bg-white py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="heading-xl mb-6 text-center" style={{ color: "#2E2E2E" }}>
             {dictionary.home.conditions.title}
           </h1>
-          <p className="text-lg mb-12 text-center">{dictionary.home.conditions.subtitle}</p>
+          <p className="text-lg mb-8 text-center">{dictionary.home.conditions.subtitle}</p>
 
           {/* Individual conditions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
             {conditions.map((condition, index) => (
               <div key={index} className="bg-gray-50 rounded-lg overflow-hidden shadow-md">
                 <div className="relative h-64 w-full">

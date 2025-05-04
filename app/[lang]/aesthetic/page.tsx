@@ -91,7 +91,7 @@ export default async function AestheticPage({ params }: { params: { lang: string
       />
       <div className="bg-[#FAFAFA]">
         {/* Hero Section */}
-        <section className="bg-[#FFFFFF] py-16">
+        <section className="bg-[#FFFFFF] py-8">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="heading-xl mb-6">
@@ -107,7 +107,7 @@ export default async function AestheticPage({ params }: { params: { lang: string
         </section>
 
         {/* Services List */}
-        <section className="py-16">
+        <section className="py-10">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto space-y-16">
               {aestheticItems.map((service: any, index: number) => (
@@ -155,7 +155,7 @@ export default async function AestheticPage({ params }: { params: { lang: string
         </section>
 
         {/* Aesthetic Procedures Section */}
-        <section className="py-16" style={{ backgroundColor: "#e8e8e8" }}>
+        <section className="py-10" style={{ backgroundColor: "#e8e8e8" }}>
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
@@ -237,7 +237,7 @@ export default async function AestheticPage({ params }: { params: { lang: string
         </section>
 
         {/* Before/After Section Placeholder */}
-        <section className="py-16">
+        <section className="py-10">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
@@ -276,7 +276,7 @@ export default async function AestheticPage({ params }: { params: { lang: string
         </section>
 
         {/* Call to Action */}
-        <section className="py-16" style={{ backgroundColor: "#e8e8e8" }}>
+        <section className="py-10" style={{ backgroundColor: "#e8e8e8" }}>
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="heading-md mb-6" style={{ color: "#2E2E2E" }}>

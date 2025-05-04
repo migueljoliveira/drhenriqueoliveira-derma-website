@@ -171,7 +171,7 @@ export default async function FAQPage({ params }: { params: { lang: string } }) 
       />
       <div className="bg-[#FAFAFA]">
         {/* Hero Section */}
-        <section className="bg-[#FFFFFF] py-16">
+        <section className="bg-[#FFFFFF] py-8">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="heading-xl mb-6">
@@ -187,7 +187,7 @@ export default async function FAQPage({ params }: { params: { lang: string } }) 
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16">
+        <section className="py-10">
           <div className="container mx-auto px-6">
             <FAQSection
               title={params.lang === "pt" ? "Dúvidas Sobre Tratamentos" : "Treatment Questions"}
@@ -202,7 +202,7 @@ export default async function FAQPage({ params }: { params: { lang: string } }) 
         </section>
 
         {/* Call to Action */}
-        <section className="py-16" style={{ backgroundColor: "#E6F0FF" }}>
+        <section className="py-10" style={{ backgroundColor: "#E6F0FF" }}>
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="heading-md mb-6" style={{ color: "#2E2E2E" }}>

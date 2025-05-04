@@ -201,10 +201,10 @@ export default function TechnologiesClientPage({ params }: { params: { lang: str
       />
       <div className="bg-[#FAFAFA]">
         {/* Hero Section */}
-        <section className="bg-[#FFFFFF] py-16">
+        <section className="bg-[#FFFFFF] py-8">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="heading-xl mb-6">
+              <h1 className="heading-xl mb-3">
                 {params.lang === "pt" ? "Tecnologias Avançadas" : "Advanced Technologies"}
               </h1>
               <p className="text-lg text-gray-700">
@@ -217,14 +217,14 @@ export default function TechnologiesClientPage({ params }: { params: { lang: str
         </section>
 
         {/* Technologies Section */}
-        <section className="py-16">
+        <section className="py-10">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">
               {technologies.map((tech, index) => (
                 <div
                   key={tech.id}
                   id={tech.id}
-                  className={`mb-16 ${
+                  className={`mb-12 ${
                     index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                   } flex flex-col lg:flex-row items-center gap-10`}
                 >
@@ -305,7 +305,7 @@ export default function TechnologiesClientPage({ params }: { params: { lang: str
         </section>
 
         {/* Consultation CTA */}
-        <section className="py-16" style={{ backgroundColor: "#e8e8e8" }}>
+        <section className="py-10" style={{ backgroundColor: "#e8e8e8" }}>
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="heading-md mb-6" style={{ color: "#2E2E2E" }}>
@@ -330,7 +330,7 @@ export default function TechnologiesClientPage({ params }: { params: { lang: str
         </section>
 
         {/* FAQ Teaser */}
-        <section className="py-16 bg-white">
+        <section className="py-10 bg-white">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="heading-lg mb-4" style={{ color: "#2E2E2E" }}>

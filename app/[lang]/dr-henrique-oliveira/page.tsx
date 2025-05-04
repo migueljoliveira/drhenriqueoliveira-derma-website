@@ -117,22 +117,22 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
       />
       <div className="bg-[#FAFAFA]">
         {/* Hero Section */}
-        <section className="bg-[#FFFFFF] py-16">
+        <section className="bg-[#FFFFFF] py-8">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="heading-xl mb-6">{dict.title}</h1>
+              <h1 className="heading-xl mb-4">{dict.title}</h1>
               <p className="text-lg text-gray-700">{dict.subtitle}</p>
             </div>
           </div>
         </section>
 
         {/* Doctor Profile */}
-        <section className="py-16">
+        <section className="py-10">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-start gap-12">
               <div className="md:w-1/3">
                 <div className="sticky top-8">
-                  <div className="bg-white rounded-xl p-6 shadow-sm mb-6">
+                  <div className="bg-white rounded-xl p-6 shadow-sm mb-4">
                     <h3 className="font-medium text-lg mb-4" style={{ color: "#f96c8b" }}>
                       Informações Profissionais
                     </h3>
@@ -173,12 +173,12 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 <h2 className="heading-lg mb-4" style={{ color: "#2E2E2E" }}>
                   Dr. Henrique Oliveira
                 </h2>
-                <h3 className="text-xl mb-6" style={{ color: "#2E2E2E" }}>
+                <h3 className="text-xl mb-4" style={{ color: "#2E2E2E" }}>
                   Dermatologista & Especialista em Dermatologia estética e cosmética
                 </h3>
 
                 {/* Doctor Gallery - Automatic Slideshow */}
-                <div className="mb-8">
+                <div className="mb-4">
                   <h3 className="text-lg font-semibold mb-4" style={{ color: "#f96c8b" }}>
                     Galeria
                   </h3>
@@ -186,7 +186,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 </div>
 
                 {/* Biography Section */}
-                <div className="mb-8 mt-8">
+                <div className="mb-4 mt-4">
                   <h4 className="text-lg font-semibold mb-4" style={{ color: "#f96c8b" }}>
                     Biografia
                   </h4>
@@ -219,7 +219,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 </div>
 
                 {/* Education Section */}
-                <div className="mb-8">
+                <div className="mb-4">
                   <h4 className="text-lg font-semibold mb-4" style={{ color: "#f96c8b" }}>
                     Educação
                   </h4>
@@ -244,7 +244,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 </div>
 
                 {/* Professional Experience Section */}
-                <div className="mb-8">
+                <div className="mb-4">
                   <h4 className="text-lg font-semibold mb-4" style={{ color: "#f96c8b" }}>
                     Experiência Profissional
                   </h4>
@@ -268,7 +268,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 </div>
 
                 {/* Affiliations Section */}
-                <div className="mb-8">
+                <div className="mb-4">
                   <h4 className="text-lg font-semibold mb-4" style={{ color: "#f96c8b" }}>
                     Afiliações e Contribuições
                   </h4>
@@ -286,7 +286,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 </div>
 
                 {/* Publications Section */}
-                <div className="mb-8">
+                <div className="mb-4">
                   <h4 className="text-lg font-semibold mb-4" style={{ color: "#f96c8b" }}>
                     Publicações Destacadas
                   </h4>
@@ -342,10 +342,10 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
         </section>
 
         {/* Philosophy */}
-        <section className="py-16 bg-[#E6F0FF]">
+        <section className="py-10 bg-[#E6F0FF]">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="heading-lg mb-6" style={{ color: "#2E2E2E" }}>
+              <h2 className="heading-lg mb-4" style={{ color: "#2E2E2E" }}>
                 {dict.philosophy?.title || "Nossa Filosofia"}
               </h2>
               <div className="space-y-4 text-gray-700">

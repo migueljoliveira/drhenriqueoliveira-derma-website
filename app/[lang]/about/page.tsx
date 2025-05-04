@@ -6,7 +6,7 @@ export default async function AboutPage({ params: { lang } }: { params: { lang: 
   const dict = await getDictionary(lang)
 
   return (
-    <div className="bg-[#FAFAFA] pt-4">
+    <div className="bg-[#FAFAFA] pt-3">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row gap-6 mb-8">
@@ -43,7 +43,7 @@ export default async function AboutPage({ params: { lang } }: { params: { lang: 
             </div>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <h2 className="text-xl font-medium mb-3 text-gray-700 text-center">
               {dict.about.doctor && dict.about.doctor.education ? dict.about.doctor.education.title : "Education"}
             </h2>
@@ -59,7 +59,7 @@ export default async function AboutPage({ params: { lang } }: { params: { lang: 
             </div>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <h2 className="text-xl font-medium mb-3 text-gray-700 text-center">
               {dict.about.doctor && dict.about.doctor.experience ? dict.about.doctor.experience.title : "Experience"}
             </h2>
@@ -73,7 +73,7 @@ export default async function AboutPage({ params: { lang } }: { params: { lang: 
           </div>
 
           {dict.about.philosophy && (
-            <div className="mb-6">
+            <div className="mb-4">
               <h2 className="text-xl font-medium mb-3 text-gray-700 text-center">{dict.about.philosophy.title}</h2>
               <div className="bg-white rounded-lg shadow-md p-4">
                 <div className="space-y-3">

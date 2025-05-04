@@ -201,7 +201,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
   return (
     <div style={{ backgroundColor: "#FAFAFA", color: "#2E2E2E" }} className="font-sans">
       {/* HERO SECTION */}
-      <section className="flex flex-col-reverse lg:flex-row items-center justify-between px-6 py-16 max-w-6xl mx-auto">
+      <section className="flex flex-col-reverse lg:flex-row items-center justify-between px-6 py-10 max-w-6xl mx-auto">
         <div className="max-w-xl text-center lg:text-left">
           <h1 className="heading-xl mb-6">
             {dictionary.home?.hero?.title1 || "Expert"} <br />{" "}
@@ -228,7 +228,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* ABOUT */}
-      <section style={{ backgroundColor: "#FFFFFF" }} className="px-6 py-12">
+      <section style={{ backgroundColor: "#FFFFFF" }} className="px-6 py-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 style={{ color: "#2E2E2E" }} className="text-xl font-medium mb-2">
             {dictionary.home?.about?.overline || "ABOUT"}
@@ -250,7 +250,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* SERVICES */}
-      <section style={{ backgroundColor: "#FAFAFA" }} className="px-6 py-14">
+      <section style={{ backgroundColor: "#FAFAFA" }} className="px-6 py-10">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 style={{ color: "#2E2E2E" }} className="text-xl font-medium mb-2">
@@ -298,7 +298,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* COMMON CONDITIONS */}
-      <section style={{ backgroundColor: "#f8ebef" }} className="px-6 py-14">
+      <section style={{ backgroundColor: "#f8ebef" }} className="px-6 py-10">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 style={{ color: "#2E2E2E" }} className="text-xl font-medium mb-2">
@@ -326,7 +326,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* TESTIMONIAL */}
-      <section style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid #260279" }} className="px-6 py-16">
+      <section style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid #260279" }} className="px-6 py-10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 style={{ color: "#2E2E2E" }} className="text-xl font-medium mb-6">
             {dictionary.home?.testimonials?.overline || "TESTIMONIALS"}
@@ -336,7 +336,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       </section>
 
       {/* CTA SECTION */}
-      <section className="px-6 py-16 text-white" style={{ backgroundColor: "#e8e8e8" }}>
+      <section className="px-6 py-10 text-white" style={{ backgroundColor: "#e8e8e8" }}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="heading-lg mb-6" style={{ color: "#2E2E2E" }}>
             {dictionary.home?.cta?.title || "Schedule Your Consultation"}
