@@ -1,6 +1,40 @@
 import { getDictionary } from "@/dictionaries"
 import Image from "next/image"
 import Link from "next/link"
+// Add metadata export for better SEO
+import type { Metadata } from "next"
+
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const dict = await getDictionary(params.lang)
+
+  const title =
+    params.lang === "pt" ? "Dr. Henrique Oliveira - Sobre o Médico" : "Dr. Henrique Oliveira - About the Doctor"
+
+  const description =
+    params.lang === "pt"
+      ? "Conheça o Dr. Henrique Oliveira, dermatologista com mais de 30 anos de experiência em dermatologia clínica e estética."
+      : "Meet Dr. Henrique Oliveira, a dermatologist with over 30 years of experience in clinical and aesthetic dermatology."
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://drhenriqueoliveira.com/${params.lang}/${params.lang === "pt" ? "dr-henrique-oliveira" : "about"}`,
+      languages: {
+        en: "https://drhenriqueoliveira.com/en/about",
+        pt: "https://drhenriqueoliveira.com/pt/dr-henrique-oliveira",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://drhenriqueoliveira.com/${params.lang}/${params.lang === "pt" ? "dr-henrique-oliveira" : "about"}`,
+      siteName: "Dr. Henrique Oliveira",
+      locale: params.lang === "pt" ? "pt_PT" : "en_US",
+      type: "website",
+    },
+  }
+}
 
 export default async function AboutPage({ params: { lang } }: { params: { lang: string } }) {
   const dict = await getDictionary(lang)

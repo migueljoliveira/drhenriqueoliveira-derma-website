@@ -8,6 +8,8 @@ import { FlashingButton } from "@/components/flashing-button"
 import { FlashingServiceCard } from "@/components/flashing-service-card"
 import { FlashingHighlight } from "@/components/flashing-highlight"
 import { FixedImageGallery } from "@/components/fixed-image-gallery"
+// Add structured data for the homepage
+import Script from "next/script"
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const dict = await getDictionary(params.lang)
@@ -46,6 +48,27 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 export default async function Home({ params }: { params: { lang: string } }) {
   // Fetch dictionary server-side
   const dictionary = await getDictionary(params.lang)
+
+  // Add this right after the dictionary and other variables are defined
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: params.lang === "pt" ? "Dr. Henrique Oliveira - Dermatologista" : "Dr. Henrique Oliveira - Dermatologist",
+    description:
+      params.lang === "pt"
+        ? "Tratamentos personalizados de dermatologia médica e estética. Especialista com mais de 30 anos de experiência."
+        : "Personalized medical and aesthetic dermatology treatments. Specialist with over 30 years of experience.",
+    url: `https://drhenriqueoliveira.com/${params.lang}`,
+    mainEntity: {
+      "@type": "MedicalBusiness",
+      name: "Dr. Henrique Oliveira - Dermatologia",
+      medicalSpecialty: ["Dermatology", "Aesthetic Medicine"],
+    },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", "h3"],
+    },
+  }
 
   // Create language-specific testimonials
   const testimonials =
@@ -198,8 +221,14 @@ export default async function Home({ params }: { params: { lang: string } }) {
           },
         ]
 
+  // Add this inside the return statement, right after the opening <div> tag
   return (
     <div style={{ backgroundColor: "#FAFAFA", color: "#2E2E2E" }} className="font-sans">
+      <Script
+        id="homepage-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* HERO SECTION */}
       <section className="flex flex-col-reverse lg:flex-row items-center justify-between px-6 py-10 max-w-6xl mx-auto">
         <div className="max-w-xl text-center lg:text-left">

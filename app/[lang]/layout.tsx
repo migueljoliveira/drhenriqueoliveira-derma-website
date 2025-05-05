@@ -105,17 +105,20 @@ export default async function LangLayout({
             image: "https://drhenriqueoliveira.com/dr-oliveira-1.png",
             description:
               validLang === "pt"
-                ? "Especialista em Dermatologia estética e cosmética com mais de 30 anos de experiência."
-                : "Specialist in Aesthetic and Cosmetic Dermatology with over 30 years of experience.",
+                ? "Especialista em Dermatologia estética e cosmética com mais de 30 anos de experiência. Atendimento em Coimbra e Viseu."
+                : "Specialist in Aesthetic and Cosmetic Dermatology with over 30 years of experience. Practice in Coimbra and Viseu.",
             address: [
               {
                 "@type": "PostalAddress",
                 addressLocality: "Coimbra",
+                addressRegion: "Coimbra",
                 addressCountry: "Portugal",
+                streetAddress: "Rua Ferreira Borges 165 2º andar",
               },
               {
                 "@type": "PostalAddress",
                 addressLocality: "Viseu",
+                addressRegion: "Viseu",
                 addressCountry: "Portugal",
               },
             ],
@@ -136,6 +139,20 @@ export default async function LangLayout({
               },
             ],
             sameAs: ["https://www.facebook.com/CursoCCD/", "https://www.instagram.com/migueljoliveira"],
+            medicalSpecialty: ["Dermatology", "Aesthetic Medicine", "Cosmetic Dermatology"],
+            availableService: [
+              {
+                "@type": "MedicalProcedure",
+                name: "Clinical Dermatology",
+                procedureType: "http://schema.org/MedicalProcedureType/DiagnosticProcedure",
+              },
+              {
+                "@type": "MedicalProcedure",
+                name: "Aesthetic Dermatology",
+                procedureType: "http://schema.org/MedicalProcedureType/TherapeuticProcedure",
+              },
+            ],
+            priceRange: "€€€",
           }),
         }}
       />

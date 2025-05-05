@@ -8,5 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/api/", "/admin/"],
     },
     sitemap: "https://drhenriqueoliveira.com/sitemap.xml",
+    host: "https://drhenriqueoliveira.com",
   }
 }
