@@ -555,15 +555,15 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
       {isMenuOpen && (
         <div
           className="md:hidden fixed top-[70px] right-0 z-[9999] w-64 rounded-bl-2xl shadow-lg"
-          style={{ backgroundColor: "rgba(255, 92, 141, 0.98)" }}
+          style={{ backgroundColor: "rgba(250, 250, 252, 0.98)" }}
         >
-          <div className="px-4 py-4 flex flex-col space-y-2">
+          <div className="px-4 py-3 flex flex-col">
             <motion.button
               onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "about" : "about"))}
               style={{
-                color: "#ffffff",
+                color: "#333333",
               }}
-              className="py-1 text-left text-sm font-light"
+              className="py-2 text-left text-sm font-light border-b border-pink-200"
               disabled={isNavigating}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -575,9 +575,9 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
             <motion.button
               onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "services" : "services"))}
               style={{
-                color: "#ffffff",
+                color: "#333333",
               }}
-              className="py-1 text-left text-sm font-light"
+              className="py-2 text-left text-sm font-light border-b border-pink-200"
               disabled={isNavigating}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -590,9 +590,9 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
             <motion.button
               onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "technologies" : "technologies"))}
               style={{
-                color: "#ffffff",
+                color: "#333333",
               }}
-              className="py-1 text-left pl-3 text-sm font-light"
+              className="py-2 text-left pl-3 text-sm font-light border-b border-pink-200"
               disabled={isNavigating}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -604,9 +604,9 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
             <motion.button
               onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "dermatology" : "dermatology"))}
               style={{
-                color: "#ffffff",
+                color: "#333333",
               }}
-              className="py-1 text-left text-sm font-light"
+              className="py-2 text-left text-sm font-light border-b border-pink-200"
               disabled={isNavigating}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -618,9 +618,9 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
             <motion.button
               onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "aesthetic" : "aesthetic"))}
               style={{
-                color: "#ffffff",
+                color: "#333333",
               }}
-              className="py-1 text-left text-sm font-light"
+              className="py-2 text-left text-sm font-light border-b border-pink-200"
               disabled={isNavigating}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -632,9 +632,9 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
             <motion.button
               onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "contact" : "contact"))}
               style={{
-                color: "#ffffff",
+                color: "#333333",
               }}
-              className="py-1 text-left text-sm font-light"
+              className="py-2 text-left text-sm font-light"
               disabled={isNavigating}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -646,7 +646,7 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
             {/* Close button at the bottom */}
             <motion.button
               onClick={() => setIsMenuOpen(false)}
-              className="mt-2 bg-white text-[#ff5c8d] px-3 py-1 rounded-full text-xs font-normal"
+              className="mt-4 bg-pink-100 text-[#ff5c8d] px-3 py-1 rounded-full text-xs font-normal self-end"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.6 }}
