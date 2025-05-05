@@ -354,10 +354,12 @@ export function Header({ lang, dictionary = {} }: HeaderProps) {
             >
               EN
             </button>
+          </div>
 
-            {/* Mobile Menu Button - Only visible on mobile */}
+          {/* Mobile Menu Button in its own container */}
+          <div className="md:hidden ml-2">
             <button
-              className="md:hidden ml-2 text-white hover:text-white/80 transition-colors"
+              className="text-white hover:text-white/80 transition-colors p-2 bg-white/20 rounded-md"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -365,89 +367,92 @@ export function Header({ lang, dictionary = {} }: HeaderProps) {
             </button>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 relative z-10" style={{ backgroundColor: "rgba(255, 92, 141, 0.95)" }}>
-            <nav className="container mx-auto px-6 flex flex-col space-y-4">
-              <button
-                onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "about" : "about"))}
-                style={{
-                  color: isActive(lang === "pt" ? "/about" : "/about") ? "#ffffff" : "rgba(255, 255, 255, 0.85)",
-                }}
-                className={`py-2 text-left ${isActive(lang === "pt" ? "/about" : "/about") ? "font-medium" : "hover:text-white"}`}
-                disabled={isNavigating}
-              >
-                {nav.about}
-              </button>
-
-              {/* Services main button */}
-              <button
-                onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "services" : "services"))}
-                style={{
-                  color: isActive(lang === "pt" ? "/services" : "/services") ? "#ffffff" : "rgba(255, 255, 255, 0.85)",
-                }}
-                className={`py-2 text-left ${isActive(lang === "pt" ? "/services" : "/services") ? "font-medium" : "hover:text-white"}`}
-                disabled={isNavigating}
-              >
-                {nav.services}
-              </button>
-
-              {/* Technologies sub-item with indentation */}
-              <button
-                onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "technologies" : "technologies"))}
-                style={{
-                  color: isActive(lang === "pt" ? "/technologies" : "/technologies")
-                    ? "#ffffff"
-                    : "rgba(255, 255, 255, 0.85)",
-                }}
-                className={`py-2 text-left pl-6 ${isActive(lang === "pt" ? "/technologies" : "/technologies") ? "font-medium" : "hover:text-white"}`}
-                disabled={isNavigating}
-              >
-                — {nav.technologies || (lang === "pt" ? "Tecnologias" : "Technologies")}
-              </button>
-
-              <button
-                onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "dermatology" : "dermatology"))}
-                style={{
-                  color: isActive(lang === "pt" ? "/dermatology" : "/dermatology")
-                    ? "#ffffff"
-                    : "rgba(255, 255, 255, 0.85)",
-                }}
-                className={`py-2 text-left ${isActive(lang === "pt" ? "/dermatology" : "/dermatology") ? "font-medium" : "hover:text-white"}`}
-                disabled={isNavigating}
-              >
-                {nav.dermatology}
-              </button>
-
-              <button
-                onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "aesthetic" : "aesthetic"))}
-                style={{
-                  color: isActive(lang === "pt" ? "/aesthetic" : "/aesthetic")
-                    ? "#ffffff"
-                    : "rgba(255, 255, 255, 0.85)",
-                }}
-                className={`py-2 text-left ${isActive(lang === "pt" ? "/aesthetic" : "/aesthetic") ? "font-medium" : "hover:text-white"}`}
-                disabled={isNavigating}
-              >
-                {nav.aesthetic}
-              </button>
-
-              <button
-                onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "contact" : "contact"))}
-                style={{
-                  color: isActive(lang === "pt" ? "/contact" : "/contact") ? "#ffffff" : "rgba(255, 255, 255, 0.85)",
-                  backgroundColor: isActive(lang === "pt" ? "/contact" : "/contact") ? "#E6F0FF" : "transparent",
-                }}
-                className={`py-2 text-left ${isActive(lang === "pt" ? "/contact" : "/contact") ? "font-medium" : "hover:text-white"}`}
-                disabled={isNavigating}
-              >
-                {nav.contact}
-              </button>
-            </nav>
-          </div>
-        )}
       </header>
+
+      {/* Mobile Navigation - Completely separate from header */}
+      {isMenuOpen && (
+        <div
+          className="md:hidden fixed top-[70px] right-0 z-[9999] w-64 rounded-bl-2xl shadow-lg"
+          style={{ backgroundColor: "rgba(255, 92, 141, 0.98)" }}
+        >
+          <div className="px-4 py-4 flex flex-col space-y-2">
+            <button
+              onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "about" : "about"))}
+              style={{
+                color: "#ffffff",
+              }}
+              className="py-1 text-left text-sm font-light"
+              disabled={isNavigating}
+            >
+              {nav.about}
+            </button>
+
+            <button
+              onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "services" : "services"))}
+              style={{
+                color: "#ffffff",
+              }}
+              className="py-1 text-left text-sm font-light"
+              disabled={isNavigating}
+            >
+              {nav.services}
+            </button>
+
+            {/* Technologies sub-item with indentation */}
+            <button
+              onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "technologies" : "technologies"))}
+              style={{
+                color: "#ffffff",
+              }}
+              className="py-1 text-left pl-3 text-sm font-light"
+              disabled={isNavigating}
+            >
+              — {nav.technologies || (lang === "pt" ? "Tecnologias" : "Technologies")}
+            </button>
+
+            <button
+              onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "dermatology" : "dermatology"))}
+              style={{
+                color: "#ffffff",
+              }}
+              className="py-1 text-left text-sm font-light"
+              disabled={isNavigating}
+            >
+              {nav.dermatology}
+            </button>
+
+            <button
+              onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "aesthetic" : "aesthetic"))}
+              style={{
+                color: "#ffffff",
+              }}
+              className="py-1 text-left text-sm font-light"
+              disabled={isNavigating}
+            >
+              {nav.aesthetic}
+            </button>
+
+            <button
+              onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "contact" : "contact"))}
+              style={{
+                color: "#ffffff",
+              }}
+              className="py-1 text-left text-sm font-light"
+              disabled={isNavigating}
+            >
+              {nav.contact}
+            </button>
+
+            {/* Close button at the bottom */}
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-2 bg-white text-[#ff5c8d] px-3 py-1 rounded-full text-xs font-normal"
+            >
+              Close Menu
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

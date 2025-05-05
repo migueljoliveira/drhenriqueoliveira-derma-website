@@ -211,12 +211,14 @@ export default async function Home({ params }: { params: { lang: string } }) {
             {dictionary.home?.hero?.subtitle || "Personalized treatments for healthy, beautiful skin."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-3">
-            <FlashingButton
-              href={`/${params.lang}/${params.lang === "pt" ? "servicos" : "services"}`}
-              variant="primary"
-            >
-              {dictionary.home?.hero?.primaryButton || "View Services"}
-            </FlashingButton>
+            <div className="flashing-button-wrapper">
+              <FlashingButton
+                href={`/${params.lang}/${params.lang === "pt" ? "servicos" : "services"}`}
+                variant="primary"
+              >
+                {dictionary.home?.hero?.primaryButton || "View Services"}
+              </FlashingButton>
+            </div>
             <AnimatedButton href={`/${params.lang}/${params.lang === "pt" ? "contato" : "contact"}`} variant="light">
               {dictionary.home?.hero?.secondaryButton || "Contact Us"}
             </AnimatedButton>
@@ -345,13 +347,15 @@ export default async function Home({ params }: { params: { lang: string } }) {
             {dictionary.home?.cta?.subtitle ||
               "Contact us today to schedule your personalized dermatological consultation."}
           </p>
-          <FlashingButton
-            href={`/${params.lang}/${params.lang === "pt" ? "contato" : "contact"}`}
-            variant="dark"
-            className="px-8 py-3"
-          >
-            {dictionary.home?.cta?.button || "Contact Us"}
-          </FlashingButton>
+          <div className="flashing-button-wrapper">
+            <FlashingButton
+              href={`/${params.lang}/${params.lang === "pt" ? "contato" : "contact"}`}
+              variant="dark"
+              className="px-8 py-3"
+            >
+              {dictionary.home?.cta?.button || "Contact Us"}
+            </FlashingButton>
+          </div>
         </div>
       </section>
     </div>

@@ -173,3 +173,95 @@
     transform: scale(1) translate(0px, 0px);
   }
 }
+
+/* Extremely targeted fix for "Ver tratamentos" button */
+a[href*="tratamento"] button,
+a[href*="treatment"] button,
+a[href*="tratamento"],
+a[href*="treatment"],
+a[href*="tratamento"] *,
+a[href*="treatment"] * {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Target all button states */
+a[href*="tratamento"]:focus,
+a[href*="treatment"]:focus,
+a[href*="tratamento"]:active,
+a[href*="treatment"]:active,
+a[href*="tratamento"]:hover,
+a[href*="treatment"]:hover,
+a[href*="tratamento"] button:focus,
+a[href*="treatment"] button:focus,
+a[href*="tratamento"] button:active,
+a[href*="treatment"] button:active,
+a[href*="tratamento"] button:hover,
+a[href*="treatment"] button:hover {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+/* Target specific button classes that might be used */
+.btn-primary,
+.btn-secondary,
+.btn-dark,
+.animated-button,
+.flashing-button {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Fix for mobile menu */
+.fixed {
+  position: fixed !important;
+}
+
+.z-\[9999\] {
+  z-index: 9999 !important;
+}
+
+/* Add these more specific styles at the end of the file to override any problematic styles */
+
+/* Fix for the "Ver tratamentos" button on small screens */
+.flashing-button-wrapper,
+.flashing-button-wrapper > *,
+.flashing-button-wrapper > * > *,
+.flashing-button-wrapper > * > * > * {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-color: transparent !important;
+  width: auto !important;
+}
+
+/* Make sure buttons have consistent styling */
+.flashing-button-wrapper button,
+.animated-button {
+  display: inline-flex !important;
+  width: auto !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Fix for mobile view */
+@media (max-width: 640px) {
+  .sm\:flex-col .flashing-button-wrapper,
+  .sm\:flex-col .animated-button {
+    width: auto !important;
+    max-width: 100% !important;
+    display: inline-flex !important;
+  }
+}

@@ -9,7 +9,7 @@ import { useState } from "react"
 import { FlashingEffect } from "./flashing-effect"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-0 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -67,6 +67,14 @@ export function FlashingButton({ className, variant, size, asChild = false, href
         transition={{ duration: 0.2 }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        style={{
+          outline: "none !important",
+          boxShadow: "none !important",
+          border: "none !important",
+          borderColor: "transparent !important",
+          width: "auto",
+          display: "inline-flex",
+        }}
         {...props}
       />
     </FlashingEffect>
@@ -74,7 +82,18 @@ export function FlashingButton({ className, variant, size, asChild = false, href
 
   if (href) {
     return (
-      <Link href={href} className="inline-block">
+      <Link
+        href={href}
+        className="inline-block focus:outline-none focus:ring-0 focus:ring-offset-0"
+        style={{
+          outline: "none !important",
+          boxShadow: "none !important",
+          border: "none !important",
+          borderColor: "transparent !important",
+          width: "auto",
+          display: "inline-block",
+        }}
+      >
         {buttonContent}
       </Link>
     )

@@ -5,10 +5,9 @@ import type React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { useState } from "react"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-0 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -44,23 +43,24 @@ export interface ButtonProps
 }
 
 export function AnimatedButton({ className, variant, size, asChild = false, href, ...props }: ButtonProps) {
-  const [isHovered, setIsHovered] = useState(false)
-
   const buttonContent = (
     <motion.button
       className={buttonVariants({ variant, size, className })}
       whileHover={{ y: -2 }}
       whileTap={{ y: 0 }}
       transition={{ duration: 0.2 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      style={{ outline: "none !important", boxShadow: "none !important", border: "none !important" }}
       {...props}
     />
   )
 
   if (href) {
     return (
-      <Link href={href} className="inline-block">
+      <Link
+        href={href}
+        className="inline-block focus:outline-none focus:ring-0 focus:ring-offset-0"
+        style={{ outline: "none !important", boxShadow: "none !important", border: "none !important" }}
+      >
         {buttonContent}
       </Link>
     )
