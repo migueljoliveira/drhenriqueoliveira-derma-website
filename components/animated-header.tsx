@@ -28,6 +28,7 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
         setServicesDropdownOpen(false)
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
@@ -109,7 +110,6 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
   const handleNavigation = useCallback(
     (url: string) => {
       if (isNavigating) return
-
       setIsNavigating(true)
 
       // Use direct location change for language switching to ensure full page reload
@@ -255,29 +255,38 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
           >
             {/* Logo with animation */}
             <motion.div
-              className="h-16 w-16 relative flex items-center justify-center"
+              className="h-32 w-32 relative flex items-center justify-center"
               whileHover={{ rotate: [0, -5, 5, -5, 0] }}
               transition={{ duration: 0.5 }}
             >
               {logoError ? (
                 <motion.div
-                  className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+                  className="w-24 h-24 bg-white/90 rounded-full flex items-center justify-center shadow-lg"
+                  style={{
+                    background: "linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #ddd6fe 100%)",
+                    boxShadow: "0 0 20px rgba(147, 51, 234, 0.3), 0 0 40px rgba(59, 130, 246, 0.2)",
+                  }}
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <span className="text-gray-500 font-medium">HO</span>
+                  <span className="text-purple-600 font-bold text-3xl">HO</span>
                 </motion.div>
               ) : (
                 <Image
-                  src="/logo-new.jpg"
+                  src="/logo-new.svg"
                   alt="Dr. Henrique Oliveira Logo"
-                  width={64}
-                  height={64}
-                  className="object-contain rounded-full"
+                  width={128}
+                  height={128}
+                  className="object-contain"
+                  style={{
+                    filter:
+                      "brightness(0) saturate(100%) invert(100%) sepia(20%) saturate(300%) hue-rotate(240deg) brightness(95%) contrast(105%) drop-shadow(0 0 10px rgba(147, 51, 234, 0.4)) drop-shadow(0 0 20px rgba(139, 92, 246, 0.3))",
+                  }}
                   onError={() => setLogoError(true)}
                 />
               )}
             </motion.div>
+
             <div className="font-thin text-white tracking-wider font-heading">
               <motion.div
                 className="text-3xl md:text-4xl lg:text-5xl leading-none"
@@ -332,7 +341,6 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
               transition={{ duration: 0.2 }}
             >
               {nav.about}
-
               {/* Animated underline */}
               <AnimatePresence>
                 {hoveredItem === "about" && !isActive(lang === "pt" ? "/about" : "/about") && (
@@ -365,7 +373,6 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
               >
                 {nav.services}
                 <ChevronDown className="ml-1 h-4 w-4" />
-
                 {/* Animated underline */}
                 <AnimatePresence>
                   {hoveredItem === "services" && !isAnyServiceActive() && (
@@ -421,7 +428,6 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
               transition={{ duration: 0.2 }}
             >
               {nav.dermatology}
-
               {/* Animated underline */}
               <AnimatePresence>
                 {hoveredItem === "dermatology" && !isActive(lang === "pt" ? "/dermatology" : "/dermatology") && (
@@ -449,7 +455,6 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
               transition={{ duration: 0.2 }}
             >
               {nav.aesthetic}
-
               {/* Animated underline */}
               <AnimatePresence>
                 {hoveredItem === "aesthetic" && !isActive(lang === "pt" ? "/aesthetic" : "/aesthetic") && (
@@ -477,7 +482,6 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
               transition={{ duration: 0.2 }}
             >
               {nav.contact}
-
               {/* Animated underline */}
               <AnimatePresence>
                 {hoveredItem === "contact" && !isActive(lang === "pt" ? "/contact" : "/contact") && (

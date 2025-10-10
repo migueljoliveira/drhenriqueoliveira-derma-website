@@ -284,9 +284,9 @@ export function Header({ lang, dictionary = {} }: HeaderProps) {
                 >
                   <div className="py-1" role="menu" aria-orientation="vertical">
                     <button
-                      onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "technologies" : "technologies"))}
+                      onClick={() => handleNavigation(getLocalizedUrl(lang === "pt" ? "tecnologias" : "technologies"))}
                       className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left ${
-                        isActive(lang === "pt" ? "/technologies" : "/technologies") ? "bg-gray-100" : ""
+                        isActive(lang === "pt" ? "/tecnologias" : "/technologies") ? "bg-gray-100" : ""
                       }`}
                       role="menuitem"
                     >
