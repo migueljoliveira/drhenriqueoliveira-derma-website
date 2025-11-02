@@ -40,7 +40,7 @@ export const pt = {
             "Melasma e hiperpigmentação",
             "Alopecia e doenças do couro cabeludo",
             "Dermatoscopia para avaliação de nevos",
-            "Prevenção e diagnóstico precoce de câncer de pele",
+            "Prevenção e diagnóstico precoce de cancro de pele",
             "Doenças das unhas e infecções cutâneas",
           ],
         },
@@ -59,7 +59,7 @@ export const pt = {
             "Tratamentos para flacidez facial e corporal",
             "Harmonização facial completa",
             "Remoção de nevos (pintas) e verrugas",
-            "Excisão de cistos e lipomas",
+            "Excisão de quistos e lipomas",
             "Biópsia de lesões suspeitas",
             "Cirurgia micrográfica de Mohs",
             "Tratamento de cicatrizes e queloides",
@@ -86,7 +86,7 @@ export const pt = {
           benefits: [
             "Avaliação tricoscópica",
             "Tratamento de alopecia androgenética",
-            "Terapias para eflúvio telógeno",
+            "Terapias para eflúvio telegénico",
             "Microinfusão de medicamentos (MMP)",
             "Plasma rico em plaquetas (PRP) capilar",
             "Mesoterapia capilar",
@@ -132,7 +132,7 @@ export const pt = {
         {
           title: "Lesões Cutâneas",
           conditions: [
-            "Nevos (pintas)",
+            "Nevos (sinai)",
             "Queratoses seborreicas",
             "Queratoses actínicas",
             "Carcinoma basocelular",

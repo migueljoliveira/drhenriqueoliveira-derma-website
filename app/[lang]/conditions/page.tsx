@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira.com/${params.lang}/conditions`,
+      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/conditions`,
       languages: {
-        en: "https://drhenriqueoliveira.com/en/conditions",
-        pt: "https://drhenriqueoliveira.com/pt/conditions",
+        en: "https://drhenriqueoliveira-derma.com/en/conditions",
+        pt: "https://drhenriqueoliveira-derma.com/pt/conditions",
       },
     },
   }

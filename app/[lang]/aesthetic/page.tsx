@@ -21,16 +21,16 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira.com/${params.lang}/${params.lang === "pt" ? "estetica" : "aesthetic"}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "estetica" : "aesthetic"}`,
       languages: {
-        en: "https://drhenriqueoliveira.com/en/aesthetic",
-        pt: "https://drhenriqueoliveira.com/pt/estetica",
+        en: "https://drhenriqueoliveira-derma.com/en/aesthetic",
+        pt: "https://drhenriqueoliveira-derma.com/pt/estetica",
       },
     },
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira.com/${params.lang}/${params.lang === "pt" ? "estetica" : "aesthetic"}`,
+      url: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "estetica" : "aesthetic"}`,
       siteName: "Dr. Henrique Oliveira",
       locale: params.lang === "pt" ? "pt_PT" : "en_US",
       type: "website",

@@ -109,6 +109,15 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
   // Handle navigation with debounce to prevent double clicks
   const handleNavigation = useCallback(
     (url: string) => {
+      // avoid navigating to the same path (prevents reload loop)
+      const currentPath = pathname ?? (typeof window !== "undefined" ? window.location.pathname : "")
+      if (url === currentPath) {
+        // just close menus and return
+        setIsMenuOpen(false)
+        setServicesDropdownOpen(false)
+        return
+      }
+
       if (isNavigating) return
       setIsNavigating(true)
 
@@ -118,13 +127,12 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
         return
       }
 
-      // Use router for other navigation
-      router.push(url)
-
-      // Reset after navigation
-      setTimeout(() => {
-        setIsNavigating(false)
-      }, 500)
+      // Use router for other navigation and reliably reset navigating flag
+      router
+        .push(url)
+        .finally(() => {
+          setIsNavigating(false)
+        })
 
       // Close mobile menu if open
       if (isMenuOpen) {
@@ -136,7 +144,7 @@ export function AnimatedHeader({ lang, dictionary = {} }: HeaderProps) {
         setServicesDropdownOpen(false)
       }
     },
-    [isNavigating, isMenuOpen, servicesDropdownOpen, router],
+    [isNavigating, isMenuOpen, servicesDropdownOpen, router, pathname],
   )
 
   // Get localized URLs

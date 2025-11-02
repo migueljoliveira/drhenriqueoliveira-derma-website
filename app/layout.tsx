@@ -19,7 +19,7 @@ const raleway = Raleway({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://drhenriqueoliveira.com"),
+  metadataBase: new URL("https://drhenriqueoliveira-derma.com"),
   title: {
     default: "Dr. Henrique Oliveira - Dermatologista",
     template: "%s | Dr. Henrique Oliveira",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_PT",
-    url: "https://drhenriqueoliveira.com",
+    url: "https://drhenriqueoliveira-derma.com",
     siteName: "Dr. Henrique Oliveira - Dermatologista",
     title: "Dr. Henrique Oliveira - Dermatologista",
     description:
@@ -97,10 +97,10 @@ export const metadata: Metadata = {
     google: "google-site-verification-code",
   },
   alternates: {
-    canonical: "https://drhenriqueoliveira.com",
+    canonical: "https://drhenriqueoliveira-derma.com",
     languages: {
-      en: "https://drhenriqueoliveira.com/en",
-      pt: "https://drhenriqueoliveira.com/pt",
+      en: "https://drhenriqueoliveira-derma.com/en",
+      pt: "https://drhenriqueoliveira-derma.com/pt",
     },
   },
     generator: 'v0.dev'

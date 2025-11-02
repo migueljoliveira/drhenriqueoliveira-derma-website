@@ -4,28 +4,29 @@ import { getDictionary } from "@/dictionaries"
 import type { Metadata } from "next"
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
-
+  // Removed unused getDictionary call to avoid unused variable error
   const title = "Tratamentos | Dr. Henrique Oliveira"
   const description =
     "Conheça os tratamentos dermatológicos oferecidos pelo Dr. Henrique Oliveira, especialista com mais de 30 anos de experiência."
+
+  const locale = params.lang === "pt" ? "pt_PT" : "en_US"
 
   return {
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira.com/${params.lang}/servicos`,
+      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/servicos`,
       languages: {
-        en: "https://drhenriqueoliveira.com/en/services",
-        pt: "https://drhenriqueoliveira.com/pt/servicos",
+        en: "https://drhenriqueoliveira-derma.com/en/services",
+        pt: "https://drhenriqueoliveira-derma.com/pt/servicos",
       },
     },
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira.com/${params.lang}/servicos`,
+      url: `https://drhenriqueoliveira-derma.com/${params.lang}/servicos`,
       siteName: "Dr. Henrique Oliveira",
-      locale: "pt_PT",
+      locale,
       type: "website",
     },
   }
