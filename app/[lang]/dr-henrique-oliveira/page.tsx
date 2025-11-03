@@ -71,9 +71,9 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
             "@type": "Physician",
             name: "Dr. Henrique Oliveira",
             image: [
-              "https://drhenriqueoliveira.com/dr-oliveira-1.png",
-              "https://drhenriqueoliveira.com/dr-oliveira-2.png",
-              "https://drhenriqueoliveira.com/dr-oliveira-3.png",
+              "https://drhenriqueoliveira-derma.com/dr-oliveira-1.png",
+              "https://drhenriqueoliveira-derma.com/dr-oliveira-2.png",
+              "https://drhenriqueoliveira-derma.com/dr-oliveira-3.png",
             ],
             email: "h.g.oliveira@gmail.com",
             medicalSpecialty: ["Dermatology", "Aesthetic Dermatology", "Cosmetic Dermatology", "Aesthetic Medicine"],

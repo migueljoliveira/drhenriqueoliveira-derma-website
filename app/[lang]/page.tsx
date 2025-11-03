@@ -28,16 +28,16 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira.com/${params.lang}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}`,
       languages: {
-        en: "https://drhenriqueoliveira.com/en",
-        pt: "https://drhenriqueoliveira.com/pt",
+        en: "https://drhenriqueoliveira-derma.com/en",
+        pt: "https://drhenriqueoliveira-derma.com/pt",
       },
     },
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira.com/${params.lang}`,
+      url: `https://drhenriqueoliveira-derma.com/${params.lang}`,
       siteName: title,
       locale: params.lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
@@ -58,7 +58,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
       params.lang === "pt"
         ? "Tratamentos personalizados de dermatologia médica e estética. Especialista com mais de 30 anos de experiência."
         : "Personalized medical and aesthetic dermatology treatments. Specialist with over 30 years of experience.",
-    url: `https://drhenriqueoliveira.com/${params.lang}`,
+    url: `https://drhenriqueoliveira-derma.com/${params.lang}`,
     mainEntity: {
       "@type": "MedicalBusiness",
       name: "Dr. Henrique Oliveira - Dermatologia",

@@ -28,7 +28,7 @@ export async function getDictionary(locale: string) {
           title: "Contact Us",
           address: { line1: "Av. Exemplo, 1234", line2: "São Paulo, SP" },
           phone: "(11) 9999-9999",
-          email: "contato@drhenriqueoliveira.com",
+          email: "contato@drhenriqueoliveira-derma.com",
         },
         links: {
           title: "Quick Links",

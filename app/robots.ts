@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/"],
     },
-    sitemap: "https://drhenriqueoliveira.com/sitemap.xml",
-    host: "https://drhenriqueoliveira.com",
+    sitemap: "https://drhenriqueoliveira-derma.com/sitemap.xml",
+    host: "https://drhenriqueoliveira-derma.com",
   }
 }

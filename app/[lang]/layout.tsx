@@ -22,16 +22,16 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira.com/${params.lang}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}`,
       languages: {
-        en: "https://drhenriqueoliveira.com/en",
-        pt: "https://drhenriqueoliveira.com/pt",
+        en: "https://drhenriqueoliveira-derma.com/en",
+        pt: "https://drhenriqueoliveira-derma.com/pt",
       },
     },
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira.com/${params.lang}`,
+      url: `https://drhenriqueoliveira-derma.com/${params.lang}`,
       siteName: title,
       locale: params.lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
@@ -100,9 +100,9 @@ export default async function LangLayout({
             "@context": "https://schema.org",
             "@type": "MedicalBusiness",
             name: "Dr. Henrique Oliveira - Dermatologia",
-            url: `https://drhenriqueoliveira.com/${validLang}`,
-            logo: "https://drhenriqueoliveira.com/logo.svg",
-            image: "https://drhenriqueoliveira.com/dr-oliveira-1.png",
+            url: `https://drhenriqueoliveira-derma.com/${validLang}`,
+            logo: "https://drhenriqueoliveira-derma.com/logo.svg",
+            image: "https://drhenriqueoliveira-derma.com/dr-oliveira-1.png",
             description:
               validLang === "pt"
                 ? "Especialista em Dermatologia estética e cosmética com mais de 30 anos de experiência. Atendimento em Coimbra e Viseu."

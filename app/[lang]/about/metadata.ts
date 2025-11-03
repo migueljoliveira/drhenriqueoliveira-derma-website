@@ -8,16 +8,16 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: `${dict.about.title} | Dr. Henrique Oliveira`,
     description: dict.about.subtitle,
     alternates: {
-      canonical: `https://drhenriqueoliveira.com/${params.lang}/about`,
+      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/about`,
       languages: {
-        en: `https://drhenriqueoliveira.com/en/about`,
-        pt: `https://drhenriqueoliveira.com/pt/about`,
+        en: `https://drhenriqueoliveira-derma.com/en/about`,
+        pt: `https://drhenriqueoliveira-derma.com/pt/about`,
       },
     },
     openGraph: {
       title: `${dict.about.title} | Dr. Henrique Oliveira`,
       description: dict.about.subtitle,
-      url: `https://drhenriqueoliveira.com/${params.lang}/about`,
+      url: `https://drhenriqueoliveira-derma.com/${params.lang}/about`,
       siteName: "Dr. Henrique Oliveira",
       images: [
         {
