@@ -323,13 +323,16 @@ export const en = {
       address: {
         title: "Practice Locations",
         locations: [
-          "Rua Ferreira Borges 165 2º andar (Coimbra)",
-          "Hospital da Luz (Coimbra, Agueda, Oiã)",
+          "Coimbra - Ferreira Borges 165 2º andar (Coimbra)",
+          "Coimbra - Hospital da Luz",
+          "Agueda - Hospital da Luz",
+          "Oiã - Hospital da Luz",
           "Clinica Montes Claros (HSO dermatologia)",
           "Viseu - Viseu Vida, Clinica Particular de Viseu",
           "Anadia - IBERVITA",
+          "Coimbra - Mental Health Clinic - 912 080 258",
         ],
-        website: "www.drhenriqueoliveira-derma.com",
+        website: "https://www.personalderma.pt/",
       },
       phone: {
         title: "Phone",

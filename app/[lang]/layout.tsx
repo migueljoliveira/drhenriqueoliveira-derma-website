@@ -7,14 +7,14 @@ import Script from "next/script"
 import { Suspense } from "react"
 import { AnimatedHeader } from "@/components/animated-header"
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
-  const title =
-    params.lang === "pt" ? "Dr. Henrique Oliveira - Dermatologista" : "Dr. Henrique Oliveira - Dermatologist"
+  const title = lang === "pt" ? "Dr. Henrique Oliveira - Dermatologista" : "Dr. Henrique Oliveira - Dermatologist"
 
   const description =
-    params.lang === "pt"
+    lang === "pt"
       ? "Especialista em Dermatologia estética e cosmética com mais de 30 anos de experiência. Atendimento em Coimbra e Viseu."
       : "Specialist in Aesthetic and Cosmetic Dermatology with over 30 years of experience. Practice in Coimbra and Viseu."
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${lang}`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en",
         pt: "https://drhenriqueoliveira-derma.com/pt",
@@ -31,9 +31,9 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira-derma.com/${params.lang}`,
+      url: `https://drhenriqueoliveira-derma.com/${lang}`,
       siteName: title,
-      locale: params.lang === "pt" ? "pt_PT" : "en_US",
+      locale: lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
     },
   }
@@ -48,10 +48,12 @@ export default async function LangLayout({
   params,
 }: Readonly<{
   children: React.ReactNode
-  params: { lang: string }
+  params: Promise<{ lang: string }>
 }>) {
+  const { lang } = await params
+
   // Ensure we have a valid language parameter
-  const validLang = params.lang && ["en", "pt"].includes(params.lang) ? params.lang : "pt"
+  const validLang = lang && ["en", "pt"].includes(lang) ? lang : "pt"
 
   // Get dictionary with error handling
   let dictionary

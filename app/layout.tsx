@@ -2,7 +2,7 @@ import type React from "react"
 import { Inter, Playfair_Display, Raleway } from "next/font/google"
 import "./globals.css"
 import { ScrollRestoration } from "@/components/scroll-restoration"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 
 // Font setup
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
@@ -53,11 +53,6 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/apple-icon.jpg" }],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
   robots: {
     index: true,
     follow: true,
@@ -104,6 +99,12 @@ export const metadata: Metadata = {
     },
   },
     generator: 'v0.dev'
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 }
 
 export default function RootLayout({

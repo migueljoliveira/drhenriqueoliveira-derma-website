@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import { Mail, Phone, MapPin, Clock, Globe } from "lucide-react"
 import { LoadingIndicator } from "@/components/loading-indicator"
+import { getDictionary } from "@/dictionaries"
 import Head from "next/head"
 
 export default function ContactPage() {
@@ -64,55 +65,53 @@ export default function ContactPage() {
 
     async function loadDictionary() {
       try {
-        const response = await fetch(`/api/dictionary?lang=${lang}`)
-        if (response.ok) {
-          const data = await response.json()
-          setDictionary(data)
-        } else {
-          // Fallback dictionary
-          setDictionary({
-            contact: {
-              title: "Contact Us",
-              subtitle: "We're here to answer your questions and schedule your consultation.",
-              info: {
-                title: "Contact Information",
-                address: {
-                  title: "Practice Locations",
-                  locations: [
-                    "Ferreira Borges 165 2º andar (Coimbra)",
-                    "Hospital da Luz (Coimbra, Agueda, OIÂ)",
-                    "Clinica Montes Claros (HSO dermatologia)",
-                    "Viseu - Viseu Vida, Clinica Particular de Viseu",
-                    "ANADIA IBERVITA",
-                  ],
-                  website: "https://www.personalderma.pt/",
-                },
-                phone: { title: "Phone", number: "+55 (11) 3456-7890" },
-                email: { title: "Email", address: "h.g.oliveira@gmail.com" },
-                hours: {
-                  title: "Office Hours",
-                  weekdays: "Monday - Friday: 9:00 - 18:00",
-                  saturday: "Saturday: 9:00 - 14:00",
-                  sunday: "Sunday: Closed",
-                },
-              },
-              form: {
-                title: "Send Us a Message",
-                fields: {
-                  name: { label: "Name", placeholder: "Your name" },
-                  email: { label: "Email", placeholder: "Your email address" },
-                  phone: { label: "Phone", placeholder: "Your phone number (optional)" },
-                  message: { label: "Message", placeholder: "How can we help you?" },
-                },
-                submit: "Send Message",
-                submitting: "Sending...",
-                success: { title: "Thank You!", message: "Your message has been sent. We'll get back to you shortly." },
-              },
-            },
-          })
-        }
+        const data = await getDictionary(lang)
+        setDictionary(data)
       } catch (error) {
         console.error("Failed to load dictionary:", error)
+        setDictionary({
+          contact: {
+            title: "Contact Us",
+            subtitle: "We're here to answer your questions and schedule your consultation.",
+            info: {
+              title: "Contact Information",
+              address: {
+                title: "Practice Locations",
+                locations: [
+                  "Coimbra - Ferreira Borges 165 2º andar (Coimbra)",
+                  "Coimbra - Hospital da Luz",
+                  "Agueda - Hospital da Luz",
+                  "Oiã - Hospital da Luz",
+                  "Clinica Montes Claros (HSO dermatologia)",
+                  "Viseu - Viseu Vida, Clinica Particular de Viseu",
+                  "Anadia - IBERVITA",
+                  "Coimbra - Mental Health Clinic",
+                ],
+                website: "https://www.personalderma.pt/",
+              },
+              phone: { title: "Phone", number: "+55 (11) 3456-7890" },
+              email: { title: "Email", address: "h.g.oliveira@gmail.com" },
+              hours: {
+                title: "Office Hours",
+                weekdays: "Monday - Friday: 9:00 - 18:00",
+                saturday: "Saturday: 9:00 - 14:00",
+                sunday: "Sunday: Closed",
+              },
+            },
+            form: {
+              title: "Send Us a Message",
+              fields: {
+                name: { label: "Name", placeholder: "Your name" },
+                email: { label: "Email", placeholder: "Your email address" },
+                phone: { label: "Phone", placeholder: "Your phone number (optional)" },
+                message: { label: "Message", placeholder: "How can we help you?" },
+              },
+              submit: "Send Message",
+              submitting: "Sending...",
+              success: { title: "Thank You!", message: "Your message has been sent. We'll get back to you shortly." },
+            },
+          },
+        })
       } finally {
         setLoading(false)
       }

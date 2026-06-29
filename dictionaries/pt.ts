@@ -317,11 +317,14 @@ export const pt = {
       address: {
         title: "Locais de Atendimento",
         locations: [
-          "Rua Ferreira Borges 165 2º andar (Coimbra)",
-          "Hospital da Luz (Coimbra, Agueda, Oiã)",
+          "Coimbra - Ferreira Borges 165 2º andar (Coimbra)",
+          "Coimbra -Hospital da Luz ",
+          "Agueda - Hospital da Luz ",
+          "Oiã - Hospital da Luz ",
           "Clinica Montes Claros (HSO dermatologia)",
           "Viseu - Viseu Vida, Clinica Particular de Viseu",
           "Anadia - IBERVITA",
+          "Coimbra - Mental Health Clinic - 912 080 258",
         ],
       },
       phone: {

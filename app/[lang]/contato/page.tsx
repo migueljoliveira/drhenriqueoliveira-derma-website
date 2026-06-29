@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "next/navigation"
 import { Mail, Phone, MapPin, Clock, Globe } from "lucide-react"
 import { LoadingIndicator } from "@/components/loading-indicator"
+import { getDictionary } from "@/dictionaries"
 import Head from "next/head"
 
 export default function ContactPage() {
@@ -40,7 +41,7 @@ export default function ContactPage() {
           },
         ],
         email: "h.g.oliveira@gmail.com",
-        telephone: "+351 123456789",
+        telephone: "+351 239 825 672",
         openingHoursSpecification: [
           {
             "@type": "OpeningHoursSpecification",
@@ -61,53 +62,8 @@ export default function ContactPage() {
 
     async function loadDictionary() {
       try {
-        const response = await fetch(`/api/dictionary?lang=${lang}`)
-        if (response.ok) {
-          const data = await response.json()
-          setDictionary(data)
-        } else {
-          // Fallback dictionary
-          setDictionary({
-            contact: {
-              title: "Contato",
-              subtitle: "Estamos aqui para responder às suas perguntas e agendar sua consulta.",
-              info: {
-                title: "Informações de Contato",
-                address: {
-                  title: "Locais de Atendimento",
-                  locations: [
-                    "Ferreira Borges 165 2º andar (Coimbra)",
-                    "Hospital da Luz (Coimbra, Agueda, OIÂ)",
-                    "Clinica Montes Claros (HSO dermatologia)",
-                    "Viseu - Viseu Vida, Clinica Particular de Viseu",
-                    "ANADIA IBERVITA",
-                  ],
-                  website: "https://www.personalderma.pt/",
-                },
-                phone: { title: "Telefone", number: "+55 (11) 3456-7890" },
-                email: { title: "Email", address: "h.g.oliveira@gmail.com" },
-                hours: {
-                  title: "Horário de Funcionamento",
-                  weekdays: "Segunda - Sexta: 9:00 - 18:00",
-                  saturday: "Sábado: 9:00 - 14:00",
-                  sunday: "Domingo: Fechado",
-                },
-              },
-              form: {
-                title: "Envie uma Mensagem",
-                fields: {
-                  name: { label: "Nome", placeholder: "Seu nome" },
-                  email: { label: "Email", placeholder: "Seu endereço de email" },
-                  phone: { label: "Telefone", placeholder: "Seu número de telefone (opcional)" },
-                  message: { label: "Mensagem", placeholder: "Como podemos ajudá-lo?" },
-                },
-                submit: "Enviar Mensagem",
-                submitting: "Enviando...",
-                success: { title: "Obrigado!", message: "Sua mensagem foi enviada. Entraremos em contato em breve." },
-              },
-            },
-          })
-        }
+        const data = await getDictionary(lang)
+        setDictionary(data)
       } catch (error) {
         console.error("Failed to load dictionary:", error)
       } finally {
@@ -158,44 +114,7 @@ export default function ContactPage() {
     )
   }
 
-  const dict = dictionary.contact || {
-    title: "Contato",
-    subtitle: "Estamos aqui para responder às suas perguntas e agendar sua consulta.",
-    info: {
-      title: "Informações de Contato",
-      address: {
-        title: "Locais de Atendimento",
-        locations: [
-          "Ferreira Borges 165 2º andar (Coimbra)",
-          "Hospital da Luz (Coimbra, Agueda, OIÂ)",
-          "Clinica Montes Claros (HSO dermatologia)",
-          "Viseu - Viseu Vida, Clinica Particular de Viseu",
-          "ANADIA IBERVITA",
-        ],
-        website: "https://www.personalderma.pt/",
-      },
-      phone: { title: "Telefone", number: "+55 (11) 3456-7890" },
-      email: { title: "Email", address: "h.g.oliveira@gmail.com" },
-      hours: {
-        title: "Horário de Funcionamento",
-        weekdays: "Segunda - Sexta: 9:00 - 18:00",
-        saturday: "Sábado: 9:00 - 14:00",
-        sunday: "Domingo: Fechado",
-      },
-    },
-    form: {
-      title: "Envie uma Mensagem",
-      fields: {
-        name: { label: "Nome", placeholder: "Seu nome" },
-        email: { label: "Email", placeholder: "Seu endereço de email" },
-        phone: { label: "Telefone", placeholder: "Seu número de telefone (opcional)" },
-        message: { label: "Mensagem", placeholder: "Como podemos ajudá-lo?" },
-      },
-      submit: "Enviar Mensagem",
-      submitting: "Enviando...",
-      success: { title: "Obrigado!", message: "Sua mensagem foi enviada. Entraremos em contato em breve." },
-    },
-  }
+  const dict = dictionary.contact
 
   return (
     <>
