@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${lang}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en",
         pt: "https://drhenriqueoliveira-derma.com/pt",
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira-derma.com/${lang}`,
+      url: `https://drhenriqueoliveira-derma.com/${params.lang}`,
       siteName: title,
       locale: lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
