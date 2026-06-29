@@ -329,7 +329,7 @@ export const pt = {
       },
       phone: {
         title: "Telefone",
-        number: "+55 (11) 3456-7890",
+        number: "+351 919 462 675",
       },
       email: {
         title: "Email",
