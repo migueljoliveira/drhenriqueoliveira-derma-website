@@ -11,16 +11,17 @@ import { FixedImageGallery } from "@/components/fixed-image-gallery"
 // Add structured data for the homepage
 import Script from "next/script"
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   const title =
-    params.lang === "pt"
+    lang === "pt"
       ? "Dr. Henrique Oliveira - Dermatologista em Coimbra e Viseu"
       : "Dr. Henrique Oliveira - Dermatologist in Coimbra and Viseu"
 
   const description =
-    params.lang === "pt"
+    lang === "pt"
       ? "Tratamentos personalizados de dermatologia médica e estética. Especialista com mais de 30 anos de experiência. Prémio Carreira SPME 2024 (Sociedade Portuguesa de Medicina Estética."
       : "Personalized medical and aesthetic dermatology treatments. Specialist with over 30 years of experience.SPME 2024 Lifetime Achievement Award."
 
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${lang}`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en",
         pt: "https://drhenriqueoliveira-derma.com/pt",
@@ -37,25 +38,26 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira-derma.com/${params.lang}`,
+      url: `https://drhenriqueoliveira-derma.com/${lang}`,
       siteName: title,
-      locale: params.lang === "pt" ? "pt_PT" : "en_US",
+      locale: lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
     },
   }
 }
 
-export default async function Home({ params }: { params: { lang: string } }) {
+export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   // Fetch dictionary server-side
-  const dictionary = await getDictionary(params.lang)
+  const { lang } = await params
+  const dictionary = await getDictionary(lang)
 
   // Add this right after the dictionary and other variables are defined
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: params.lang === "pt" ? "Dr. Henrique Oliveira - Dermatologista" : "Dr. Henrique Oliveira - Dermatologist",
+    name: lang === "pt" ? "Dr. Henrique Oliveira - Dermatologista" : "Dr. Henrique Oliveira - Dermatologist",
     description:
-      params.lang === "pt"
+      lang === "pt"
         ? "Tratamentos personalizados de dermatologia médica e estética. Especialista com mais de 30 anos de experiência."
         : "Personalized medical and aesthetic dermatology treatments. Specialist with over 30 years of experience.",
     url: `https://drhenriqueoliveira-derma.com/${params.lang}`,

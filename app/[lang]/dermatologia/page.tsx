@@ -5,8 +5,9 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import { TrichologySlideshow } from "@/components/trichology-slideshow"
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   const title = "Dermatologia Clínica | Dr. Henrique Oliveira"
   const description =
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/dermatologia`,
+      canonical: `https://drhenriqueoliveira-derma.com/${lang}/dermatologia`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en/dermatology",
         pt: "https://drhenriqueoliveira-derma.com/pt/dermatologia",
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira-derma.com/${params.lang}/dermatologia`,
+      url: `https://drhenriqueoliveira-derma.com/${lang}/dermatologia`,
       siteName: "Dr. Henrique Oliveira",
       locale: "pt_PT",
       type: "website",
@@ -33,8 +34,9 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   }
 }
 
-export default async function DermatologyPage({ params }: { params: { lang: string } }) {
-  const dict = await getDictionary(params.lang)
+export default async function DermatologyPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   // Extract clinical dermatology and related items from the services dictionary
   // Filter to only include the first and third items (Clinical and Trichology)

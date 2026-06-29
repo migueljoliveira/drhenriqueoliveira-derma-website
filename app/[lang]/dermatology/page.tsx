@@ -5,16 +5,17 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import { TrichologySlideshow } from "@/components/trichology-slideshow"
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   const title =
-    params.lang === "pt"
+    lang === "pt"
       ? "Dermatologia Clínica | Dr. Henrique Oliveira"
       : "Clinical Dermatology | Dr. Henrique Oliveira"
 
   const description =
-    params.lang === "pt"
+    lang === "pt"
       ? "Tratamentos dermatológicos clínicos para diversas condições da pele, cabelo e unhas. Diagnóstico e tratamento personalizado."
       : "Clinical dermatology treatments for various skin, hair, and nail conditions. Personalized diagnosis and treatment."
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "dermatologia" : "dermatology"}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${lang}/${lang === "pt" ? "dermatologia" : "dermatology"}`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en/dermatology",
         pt: "https://drhenriqueoliveira-derma.com/pt/dermatologia",
@@ -31,16 +32,17 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "dermatologia" : "dermatology"}`,
+      url: `https://drhenriqueoliveira-derma.com/${lang}/${lang === "pt" ? "dermatologia" : "dermatology"}`,
       siteName: "Dr. Henrique Oliveira",
-      locale: params.lang === "pt" ? "pt_PT" : "en_US",
+      locale: lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
     },
   }
 }
 
-export default async function DermatologyPage({ params }: { params: { lang: string } }) {
-  const dict = await getDictionary(params.lang)
+export default async function DermatologyPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   // Extract clinical dermatology and related items from the services dictionary
   const clinicalItems = dict.services.items.filter((item: any) =>

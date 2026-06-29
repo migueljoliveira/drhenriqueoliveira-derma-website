@@ -2,14 +2,14 @@ import { getDictionary } from "@/dictionaries"
 import type { Metadata } from "next"
 import Image from "next/image"
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
-  const title =
-    params.lang === "pt" ? "Condições Tratadas - Dr. Henrique Oliveira" : "Conditions Treated - Dr. Henrique Oliveira"
+  const title = lang === "pt" ? "Condições Tratadas - Dr. Henrique Oliveira" : "Conditions Treated - Dr. Henrique Oliveira"
 
   const description =
-    params.lang === "pt"
+    lang === "pt"
       ? "Conheça as principais condições dermatológicas tratadas pelo Dr. Henrique Oliveira, especialista com mais de 30 anos de experiência."
       : "Learn about the main dermatological conditions treated by Dr. Henrique Oliveira, a specialist with over 30 years of experience."
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/conditions`,
+      canonical: `https://drhenriqueoliveira-derma.com/${lang}/conditions`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en/conditions",
         pt: "https://drhenriqueoliveira-derma.com/pt/conditions",
@@ -26,37 +26,38 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   }
 }
 
-export default async function ConditionsPage({ params }: { params: { lang: string } }) {
-  const dictionary = await getDictionary(params.lang)
+export default async function ConditionsPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const dictionary = await getDictionary(lang)
 
   // Define conditions with images and descriptions
   const conditions = [
     {
-      name: params.lang === "pt" ? "Rosácea" : "Rosacea",
+      name: lang === "pt" ? "Rosácea" : "Rosacea",
       description:
-        params.lang === "pt"
+        lang === "pt"
           ? "Condição inflamatória da pele que causa vermelhidão facial e vasos sanguíneos visíveis."
           : "Inflammatory skin condition causing facial redness and visible blood vessels.",
       image: "/rosacea-clinical.jpeg",
-      alt: params.lang === "pt" ? "Rosácea: Condição inflamatória da pele" : "Rosacea: Inflammatory skin condition",
+      alt: lang === "pt" ? "Rosácea: Condição inflamatória da pele" : "Rosacea: Inflammatory skin condition",
     },
     {
-      name: params.lang === "pt" ? "Verruga Filiforme" : "Filiform Wart",
+      name: lang === "pt" ? "Verruga Filiforme" : "Filiform Wart",
       description:
-        params.lang === "pt"
+        lang === "pt"
           ? "Crescimento benigno da pele que geralmente aparece na face, especialmente perto dos olhos."
           : "Benign skin growth that typically appears on the face, especially near the eyes.",
       image: "/filiform-wart-eyelid.jpeg",
-      alt: params.lang === "pt" ? "Verruga filiforme: Crescimento na pálpebra" : "Filiform wart: Growth on eyelid",
+      alt: lang === "pt" ? "Verruga filiforme: Crescimento na pálpebra" : "Filiform wart: Growth on eyelid",
     },
     {
-      name: params.lang === "pt" ? "Herpes-Zóster" : "Shingles",
+      name: lang === "pt" ? "Herpes-Zóster" : "Shingles",
       description:
-        params.lang === "pt"
+        lang === "pt"
           ? "Erupção cutânea dolorosa causada pela reativação do vírus da varicela-zoster."
           : "Painful skin rash caused by reactivation of the varicella-zoster virus.",
       image: "/shingles-dermatitis.jpeg",
-      alt: params.lang === "pt" ? "Herpes-zóster: Erupção cutânea dolorosa" : "Shingles: Painful skin rash",
+      alt: lang === "pt" ? "Herpes-zóster: Erupção cutânea dolorosa" : "Shingles: Painful skin rash",
     },
   ]
 
@@ -94,15 +95,15 @@ export default async function ConditionsPage({ params }: { params: { lang: strin
 
           <div className="mt-8">
             <h2 className="heading-md mb-6" style={{ color: "#2E2E2E" }}>
-              {params.lang === "pt" ? "Sobre as Condições Dermatológicas" : "About Dermatological Conditions"}
+              {lang === "pt" ? "Sobre as Condições Dermatológicas" : "About Dermatological Conditions"}
             </h2>
             <p className="mb-4">
-              {params.lang === "pt"
+              {lang === "pt"
                 ? "Dr. Henrique Oliveira é especialista no diagnóstico e tratamento de uma ampla variedade de condições dermatológicas. Com mais de 30 anos de experiência, ele utiliza as técnicas mais avançadas para oferecer o melhor cuidado possível aos seus pacientes."
                 : "Dr. Henrique Oliveira specializes in the diagnosis and treatment of a wide variety of dermatological conditions. With over 30 years of experience, he uses the most advanced techniques to provide the best possible care to his patients."}
             </p>
             <p>
-              {params.lang === "pt"
+              {lang === "pt"
                 ? "As condições acima são apenas algumas das muitas que o Dr. Henrique Oliveira trata em sua clínica. Entre em contato para mais informações sobre diagnóstico e tratamento."
                 : "The conditions above are just a few of the many that Dr. Henrique Oliveira treats at his clinic. Contact us for more information about diagnosis and treatment."}
             </p>

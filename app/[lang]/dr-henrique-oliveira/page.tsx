@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { use, useState, useEffect } from "react"
 import { AutoSlideshow } from "@/components/auto-slideshow"
 import Script from "next/script"
 import { LoadingIndicator } from "@/components/loading-indicator"
 
-export default function AboutPage({ params }: { params: { lang: string } }) {
+export default function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = use(params)
   const [dictionary, setDictionary] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
@@ -13,7 +14,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
   useEffect(() => {
     async function loadDictionary() {
       try {
-        const response = await fetch(`/api/dictionary?lang=${params.lang}`)
+        const response = await fetch(`/api/dictionary?lang=${lang}`)
         if (response.ok) {
           const data = await response.json()
           setDictionary(data)
@@ -28,7 +29,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
     }
 
     loadDictionary()
-  }, [params.lang])
+  }, [lang])
 
   // Doctor images - removed any duplicates and ensured each image is unique
   const doctorImages = [

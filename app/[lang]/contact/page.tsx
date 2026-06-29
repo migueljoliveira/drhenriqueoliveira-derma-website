@@ -2,9 +2,9 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
-import { Mail, Phone, MapPin, Clock, Globe } from "lucide-react"
+import { Clock, Globe, Mail, MapPin, Phone } from "lucide-react"
 import { LoadingIndicator } from "@/components/loading-indicator"
 import { getDictionary } from "@/dictionaries"
 import Head from "next/head"
@@ -15,18 +15,29 @@ export default function ContactPage() {
   const [dictionary, setDictionary] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
   useEffect(() => {
-    // Add structured data for the contact page
+    const pageTitle = lang === "pt" ? "Contato | Dr. Henrique Oliveira" : "Contact | Dr. Henrique Oliveira"
+    const pageDescription =
+      lang === "pt"
+        ? "Entre em contato com Dr. Henrique Oliveira para agendar sua consulta em Coimbra ou Viseu."
+        : "Contact Dr. Henrique Oliveira to book your consultation in Coimbra or Viseu."
+
     const script = document.createElement("script")
     script.type = "application/ld+json"
     script.innerHTML = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ContactPage",
-      name: lang === "pt" ? "Contato | Dr. Henrique Oliveira" : "Contact | Dr. Henrique Oliveira",
-      description:
-        lang === "pt"
-          ? "Entre em contato com Dr. Henrique Oliveira para agendar sua consulta em Coimbra ou Viseu."
-          : "Contact Dr. Henrique Oliveira to schedule your appointment in Coimbra or Viseu.",
+      name: pageTitle,
+      description: pageDescription,
       mainEntity: {
         "@type": "MedicalBusiness",
         name: "Dr. Henrique Oliveira - Dermatologia",
@@ -44,7 +55,7 @@ export default function ContactPage() {
           },
         ],
         email: "h.g.oliveira@gmail.com",
-        telephone: "+351 123456789",
+        telephone: "+351 919 462 675",
         openingHoursSpecification: [
           {
             "@type": "OpeningHoursSpecification",
@@ -69,49 +80,7 @@ export default function ContactPage() {
         setDictionary(data)
       } catch (error) {
         console.error("Failed to load dictionary:", error)
-        setDictionary({
-          contact: {
-            title: "Contact Us",
-            subtitle: "We're here to answer your questions and schedule your consultation.",
-            info: {
-              title: "Contact Information",
-              address: {
-                title: "Practice Locations",
-                locations: [
-                  "Coimbra - Ferreira Borges 165 2º andar (Coimbra)",
-                  "Coimbra - Hospital da Luz",
-                  "Agueda - Hospital da Luz",
-                  "Oiã - Hospital da Luz",
-                  "Clinica Montes Claros (HSO dermatologia)",
-                  "Viseu - Viseu Vida, Clinica Particular de Viseu",
-                  "Anadia - IBERVITA",
-                  "Coimbra - Mental Health Clinic",
-                ],
-                website: "https://www.personalderma.pt/",
-              },
-              phone: { title: "Phone", number: "+55 (11) 3456-7890" },
-              email: { title: "Email", address: "h.g.oliveira@gmail.com" },
-              hours: {
-                title: "Office Hours",
-                weekdays: "Monday - Friday: 9:00 - 18:00",
-                saturday: "Saturday: 9:00 - 14:00",
-                sunday: "Sunday: Closed",
-              },
-            },
-            form: {
-              title: "Send Us a Message",
-              fields: {
-                name: { label: "Name", placeholder: "Your name" },
-                email: { label: "Email", placeholder: "Your email address" },
-                phone: { label: "Phone", placeholder: "Your phone number (optional)" },
-                message: { label: "Message", placeholder: "How can we help you?" },
-              },
-              submit: "Send Message",
-              submitting: "Sending...",
-              success: { title: "Thank You!", message: "Your message has been sent. We'll get back to you shortly." },
-            },
-          },
-        })
+        setDictionary(null)
       } finally {
         setLoading(false)
       }
@@ -124,16 +93,6 @@ export default function ContactPage() {
     }
   }, [lang])
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -143,7 +102,6 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
@@ -151,7 +109,6 @@ export default function ContactPage() {
     }, 1500)
   }
 
-  // Show loading state while dictionary is loading
   if (loading || !dictionary) {
     return (
       <div className="bg-[#FAFAFA] min-h-screen flex items-center justify-center">
@@ -160,61 +117,21 @@ export default function ContactPage() {
     )
   }
 
-  const dict = dictionary.contact || {
-    title: "Contact Us",
-    subtitle: "We're here to answer your questions and schedule your consultation.",
-    info: {
-      title: "Contact Information",
-      address: {
-        title: "Practice Locations",
-        locations: [
-          "Ferreira Borges 165 2º andar (Coimbra)",
-          "Hospital da Luz (Coimbra, Agueda, OIÂ)",
-          "Clinica Montes Claros (HSO dermatologia)",
-          "Viseu - Viseu Vida, Clinica Particular de Viseu",
-          "ANADIA IBERVITA",
-        ],
-        website: "https://www.personalderma.pt/",
-      },
-      phone: { title: "Phone", number: "+55 (11) 3456-7890" },
-      email: { title: "Email", address: "h.g.oliveira@gmail.com" },
-      hours: {
-        title: "Office Hours",
-        weekdays: "Monday - Friday: 9:00 - 18:00",
-        saturday: "Saturday: 9:00 - 14:00",
-        sunday: "Sunday: Closed",
-      },
-    },
-    form: {
-      title: "Send Us a Message",
-      fields: {
-        name: { label: "Name", placeholder: "Your name" },
-        email: { label: "Email", placeholder: "Your email address" },
-        phone: { label: "Phone", placeholder: "Your phone number (optional)" },
-        message: { label: "Message", placeholder: "How can we help you?" },
-      },
-      submit: "Send Message",
-      submitting: "Sending...",
-      success: { title: "Thank You!", message: "Your message has been sent. We'll get back to you shortly." },
-    },
-  }
+  const dict = dictionary.contact
+  const pageTitle = lang === "pt" ? "Contato | Dr. Henrique Oliveira" : "Contact | Dr. Henrique Oliveira"
+  const pageDescription =
+    lang === "pt"
+      ? "Entre em contato com Dr. Henrique Oliveira para agendar sua consulta em Coimbra ou Viseu."
+      : "Contact Dr. Henrique Oliveira to book your consultation in Coimbra or Viseu."
 
   return (
     <>
       <Head>
-        <title>{lang === "pt" ? "Contato | Dr. Henrique Oliveira" : "Contact | Dr. Henrique Oliveira"}</title>
-        <meta
-          name="description"
-          content={
-            lang === "pt"
-              ? "Entre em contato com Dr. Henrique Oliveira para agendar sua consulta em Coimbra ou Viseu."
-              : "Contact Dr. Henrique Oliveira to schedule your appointment in Coimbra or Viseu."
-          }
-        />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
       </Head>
       <div className="bg-[#FAFAFA]">
-        {/* Hero Section */}
-        <section className="bg-[#FFFFFF] py-8">
+        <section className="bg-[#FFFFFF] py-16">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="heading-xl mb-6" style={{ color: "#f96c8b" }}>
@@ -225,11 +142,9 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact Form and Info */}
-        <section className="py-10">
+        <section className="py-16">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-12">
-              {/* Contact Information */}
               <div className="lg:w-2/5">
                 <h2 className="heading-md mb-6" style={{ color: "#f96c8b" }}>
                   {dict.info.title}
@@ -290,7 +205,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Contact Form */}
               <div className="lg:w-3/5">
                 <div className="bg-white rounded-xl shadow-sm p-8">
                   <h2 className="heading-md mb-6" style={{ color: "#f96c8b" }}>
@@ -302,11 +216,7 @@ export default function ContactPage() {
                       <h3 style={{ color: "#2E2E2E" }} className="text-xl font-medium mb-2">
                         {dict.form.success.title}
                       </h3>
-                      <p className="text-green-700">
-                        {params.lang === "pt"
-                          ? "Sua mensagem foi enviada. Dr. Henrique Oliveira entrará em contato em breve."
-                          : "Your message has been sent. Dr. Henrique Oliveira will get back to you shortly."}
-                      </p>
+                      <p className="text-green-700">{dict.form.success.message}</p>
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit}>
@@ -396,7 +306,6 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Map */}
         <section className="py-6 pb-10">
           <div className="container mx-auto px-6">
             <div className="max-w-5xl mx-auto">

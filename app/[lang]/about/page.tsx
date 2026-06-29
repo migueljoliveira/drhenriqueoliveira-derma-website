@@ -4,14 +4,14 @@ import Link from "next/link"
 // Add metadata export for better SEO
 import type { Metadata } from "next"
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
-  const title =
-    params.lang === "pt" ? "Dr. Henrique Oliveira - Sobre o Médico" : "Dr. Henrique Oliveira - About the Doctor"
+  const title = lang === "pt" ? "Dr. Henrique Oliveira - Sobre o Médico" : "Dr. Henrique Oliveira - About the Doctor"
 
   const description =
-    params.lang === "pt"
+    lang === "pt"
       ? "Conheça o Dr. Henrique Oliveira, dermatologista com mais de 30 anos de experiência em dermatologia clínica e estética."
       : "Meet Dr. Henrique Oliveira, a dermatologist with over 30 years of experience in clinical and aesthetic dermatology."
 
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "dr-henrique-oliveira" : "about"}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${lang}/${lang === "pt" ? "dr-henrique-oliveira" : "about"}`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en/about",
         pt: "https://drhenriqueoliveira-derma.com/pt/dr-henrique-oliveira",
@@ -28,15 +28,16 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "dr-henrique-oliveira" : "about"}`,
+      url: `https://drhenriqueoliveira-derma.com/${lang}/${lang === "pt" ? "dr-henrique-oliveira" : "about"}`,
       siteName: "Dr. Henrique Oliveira",
-      locale: params.lang === "pt" ? "pt_PT" : "en_US",
+      locale: lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
     },
   }
 }
 
-export default async function AboutPage({ params: { lang } }: { params: { lang: string } }) {
+export default async function AboutPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
   const dict = await getDictionary(lang)
 
   return (

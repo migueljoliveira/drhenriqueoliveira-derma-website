@@ -4,16 +4,17 @@ import { getDictionary } from "@/dictionaries"
 import type { Metadata } from "next"
 import Script from "next/script"
 
-export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const dict = await getDictionary(params.lang)
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   const title =
-    params.lang === "pt"
+    lang === "pt"
       ? "Dermatologia Estética | Dr. Henrique Oliveira"
       : "Aesthetic Dermatology | Dr. Henrique Oliveira"
 
   const description =
-    params.lang === "pt"
+    lang === "pt"
       ? "Tratamentos estéticos avançados para rejuvenescimento facial e corporal. Procedimentos minimamente invasivos com resultados naturais."
       : "Advanced aesthetic treatments for facial and body rejuvenation. Minimally invasive procedures with natural results."
 
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title,
     description,
     alternates: {
-      canonical: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "estetica" : "aesthetic"}`,
+      canonical: `https://drhenriqueoliveira-derma.com/${lang}/${lang === "pt" ? "estetica" : "aesthetic"}`,
       languages: {
         en: "https://drhenriqueoliveira-derma.com/en/aesthetic",
         pt: "https://drhenriqueoliveira-derma.com/pt/estetica",
@@ -30,16 +31,17 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     openGraph: {
       title,
       description,
-      url: `https://drhenriqueoliveira-derma.com/${params.lang}/${params.lang === "pt" ? "estetica" : "aesthetic"}`,
+      url: `https://drhenriqueoliveira-derma.com/${lang}/${lang === "pt" ? "estetica" : "aesthetic"}`,
       siteName: "Dr. Henrique Oliveira",
-      locale: params.lang === "pt" ? "pt_PT" : "en_US",
+      locale: lang === "pt" ? "pt_PT" : "en_US",
       type: "website",
     },
   }
 }
 
-export default async function AestheticPage({ params }: { params: { lang: string } }) {
-  const dict = await getDictionary(params.lang)
+export default async function AestheticPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
 
   // Extract aesthetic dermatology and related items from the services dictionary
   const aestheticItems = dict.services.items.filter((item: any) =>
@@ -51,15 +53,15 @@ export default async function AestheticPage({ params }: { params: { lang: string
   // Define detailed alt texts based on language
   const altTexts = {
     facialExamination:
-      params.lang === "pt"
+      lang === "pt"
         ? "Médico dermatologista examinando o rosto de uma paciente para tratamento cosmético, avaliando a qualidade da pele com luvas médicas"
         : "Dermatologist examining a patient's face for cosmetic treatment, assessing skin quality with medical gloves",
     facialMarking:
-      params.lang === "pt"
+      lang === "pt"
         ? "Procedimento de marcação facial pré-tratamento estético, onde o médico desenha linhas de orientação no rosto da paciente com touca cirúrgica"
         : "Pre-aesthetic treatment facial marking procedure, where the doctor draws guidance lines on the patient's face with surgical cap",
     seniorAssessment:
-      params.lang === "pt"
+      lang === "pt"
         ? "Avaliação facial personalizada em paciente sênior com marcações para procedimento de rejuvenescimento, demonstrando planejamento preciso de tratamento"
         : "Personalized facial assessment on senior patient with markings for rejuvenation procedure, demonstrating precise treatment planning",
   }
@@ -80,9 +82,9 @@ export default async function AestheticPage({ params }: { params: { lang: string
             },
             mainEntity: {
               "@type": "MedicalProcedure",
-              name: params.lang === "pt" ? "Procedimentos Estéticos" : "Aesthetic Procedures",
+              name: lang === "pt" ? "Procedimentos Estéticos" : "Aesthetic Procedures",
               howPerformed:
-                params.lang === "pt"
+                lang === "pt"
                   ? "Procedimentos minimamente invasivos realizados em consultório"
                   : "Minimally invasive procedures performed in-office",
             },
@@ -95,10 +97,10 @@ export default async function AestheticPage({ params }: { params: { lang: string
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="heading-xl mb-6">
-                {params.lang === "pt" ? "Dermatologia Estética" : "Aesthetic Dermatology"}
+                {lang === "pt" ? "Dermatologia Estética" : "Aesthetic Dermatology"}
               </h1>
               <p className="text-lg text-gray-700">
-                {params.lang === "pt"
+                {lang === "pt"
                   ? "Procedimentos estéticos avançados para rejuvenescimento e harmonização facial com resultados naturais."
                   : "Advanced aesthetic procedures for facial rejuvenation and harmonization with natural results."}
               </p>
