@@ -320,7 +320,7 @@ export const en = {
           "Coimbra - Ferreira Borges 165 2º andar (Coimbra) - 239 825 672",
           "Coimbra -  Hospital da Luz ",
           "Coimbra - Mental Health Clinic - 912 080 258",
-          "Combra - Clinica Montes Claros (HSO dermatologia) - 912 299 666",
+          "Coimbra - Clinica Montes Claros (HSO dermatologia) - 912 299 666",
           "Agueda - Hospital da Luz ",
           "Oiã - Hospital da Luz ",
           "Viseu - Viseu Vida, Clinica Particular de Viseu",
