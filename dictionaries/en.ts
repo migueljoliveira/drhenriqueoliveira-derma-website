@@ -323,7 +323,7 @@ export const en = {
           "Coimbra - Clinica Montes Claros (HSO dermatologia) - 912 299 666",
           "Agueda - Hospital da Luz ",
           "Oiã - Hospital da Luz ",
-          "Viseu - Viseu Vida, Clinica Particular de Viseu",
+          "Viseu - Viseu Vida, Clinica Particular de Viseu - 232 428 729",
           "São Pedro do Sul - Cemedis -  926 852 278",
           "Casto Daire - Clinova - 232 388 263 ",
           "Penalva do Castelo - Clínica São Genesio - 232 643 265",
